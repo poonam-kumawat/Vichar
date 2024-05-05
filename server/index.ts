@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import { connectToMongo } from "./conn";
 import cors from "cors";
+import userRouter from "./routes/userRoutes";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 
@@ -15,6 +17,28 @@ const allowedOrigins = [
 const options: cors.CorsOptions = {
   origin: allowedOrigins,
 };
+app.use(express.static("public"));
+app.use(cors(options));
+app.use(express.json());
+app.use(cookieParser())
+app.use("/api/user", userRouter);
+
+
+//Response  handleer
+
+app.use((obj: any, req: any, res: any, next: any) => {
+  const statusCode = obj.status || 500;
+  const message = obj.message || "Something went wrong";
+  return res.status(statusCode).json({
+    success: [200,201,204].some(a=>a=== obj.status)?true:false,
+    status: statusCode,
+    message: message,
+    data:obj.data,
+  });
+});
+
+
+
 
 app.get("/", (req, res) => {
   res.send("Hello, TypeScript with Express!");
