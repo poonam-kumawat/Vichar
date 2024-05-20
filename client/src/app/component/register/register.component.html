@@ -1,1 +1,14 @@
-<p>register works!</p>
+<form [formGroup]="registeration">
+    <input formControlName="name" type="text" placeholder="Name"><br><br>
+   <span *ngIf="registeration.hasError('required','name') && registeration.controls['name'].dirty" style="color:red">required</span><br><br>
+    <input formControlName="email" type="email" placeholder="Email"><br><br>
+    <span *ngIf="registeration.hasError('required','email') && registeration.controls['email'].dirty" style="color:red">required</span><br><br>
+    <span *ngIf="registeration.hasError('email','email') " style="color:red">email is invalid</span><br>
+    <input formControlName="password" type="password" placeholder="Password"><br><br>
+    <span *ngIf="registeration.hasError('required','password') && registeration.controls['password'].dirty" style="color:red">required</span><br><br>
+    <input formControlName="confirmPassword" type="password" placeholder="Confirm Password"><br><br>
+    <span *ngIf="registeration.hasError('required','confirmPassword') && registeration.controls['confirmPassword'].dirty" style="color:red">required</span><br><br>
+    <span *ngIf="registeration.hasError('confirmPasswordValidator','confirmPassword') " style="color:red">password did not match</span><br><br>
+    
+<button (click)="register()" type="submit">Submit</button>
+</form>

@@ -1,0 +1,12 @@
+<form [formGroup]="loginForm">
+   
+    <input formControlName="email" type="email" placeholder="Email"><br><br>
+    <span *ngIf="loginForm.hasError('required','email') && loginForm.controls['email'].dirty"
+        style="color:red">required</span><br><br>
+    <span *ngIf="loginForm.hasError('email','email') " style="color:red">email is invalid</span><br>
+    <input formControlName="password" type="password" placeholder="Password"><br><br>
+    <span *ngIf="loginForm.hasError('required','password') && loginForm.controls['password'].dirty"
+        style="color:red">required</span><br><br>
+      <button (click)="login()" type="submit">Login</button>
+</form>
+
