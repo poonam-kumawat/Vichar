@@ -4,20 +4,19 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { confirmPasswordValidator } from '../../Validators/customValidator';
 import { SharedService } from '../../service/shared.service';
 import { Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule],
-templateUrl: './register.component.html',
+  imports: [ReactiveFormsModule, CommonModule, HttpClientModule],
+  templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
 export class RegisterComponent implements OnInit {
   fb = inject(FormBuilder);
-  route=inject(Router)
- constructor(private sharedService:SharedService){
-
- }
+  route = inject(Router);
+  constructor(private sharedService: SharedService) {}
   registeration!: FormGroup;
   ngOnInit(): void {
     this.registeration = this.fb.group(
@@ -36,12 +35,11 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-
-  register(){
+  register() {
     this.sharedService.registerApi(this.registeration.value).subscribe({
       next: (res) => {
         alert('user Created');
-        this.route.navigate(['/login'])
+        this.route.navigate(['/login']);
       },
       error: (err) => {
         console.log(err);

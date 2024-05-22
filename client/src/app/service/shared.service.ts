@@ -14,10 +14,22 @@ export class SharedService {
     );
   }
 
-loginApi(loginObject: any) {
+  loginApi(loginObject: any) {
     return this.http.post<any>(
       `${ApiEndPont.REGISTER_POST_API}login`,
       loginObject
     );
   }
+
+  googleLoginApi(token: any) {
+    console.log(token)
+    return this.http.post<any>(
+      `${ApiEndPont.REGISTER_POST_API}login/google`,
+      {token}
+    );
+  }
 }
+
+
+  
+
