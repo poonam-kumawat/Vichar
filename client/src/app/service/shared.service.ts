@@ -22,9 +22,14 @@ export class SharedService {
   }
 
   googleLoginApi(token: any) {
-    return this.http.post<any>(
-      `${ApiEndPont.REGISTER_POST_API}login/google`,
-      {token}
+    return this.http.post<any>(`${ApiEndPont.REGISTER_POST_API}login/google`, {
+      token,
+    });
+  }
+
+  blogCreateApi(body: any) {
+    return this.http.post<any>(`${ApiEndPont.BOLG_API}create`, 
+      body,
     );
   }
 }

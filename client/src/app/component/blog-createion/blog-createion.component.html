@@ -1,0 +1,20 @@
+<p>blog-createion works!</p>
+<input type="text" placeholder="title" [(ngModel)]="titleText"/>
+<select [(ngModel)]="SelectedValue" (change)="onSelectValue($event)" >
+  <option value="Travel">Travel</option>
+  <option value="Food">Food</option>
+  <option value="Nature">Nature</option>
+  <option value="Technical">Technical</option>
+</select>
+<!-- <select [(ngModel)]="model">
+  <option *ngFor="let item of list" [value]="item">{{item}}</option>
+</select> -->
+<input type="file" accept="" [(ngModel)]="fileImage"/>
+
+<quill-editor class="content-editor" [placeholder]="''" [modules]="quillConfiguration" [(ngModel)]="htmlText" (onSelectionChanged)="onSelectionChanged($event)"
+  (onContentChanged)="onContentChanged($event)">
+</quill-editor>
+
+<button type="button" (click)="onBlogSubmit()">Sumbit</button>
+
+<div>{{fileImage}}</div>
