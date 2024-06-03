@@ -1,4 +1,4 @@
-import mongoose, { Schema, model, ObjectId } from "mongoose";
+import { Schema, model} from "mongoose";
 
 interface user{
     email:string;

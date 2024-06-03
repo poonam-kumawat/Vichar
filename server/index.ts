@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { connectToMongo } from "./conn";
 import cors from "cors";
 import userRouter from "./routes/userRoutes";
+import blogRouter from "./routes/blogRoutes";
 import cookieParser from "cookie-parser";
 
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(cors(options));
 app.use(express.json());
 app.use(cookieParser())
 app.use("/api/user", userRouter);
+app.use("/api/blog", blogRouter);
 
 
 //Response  handleer
