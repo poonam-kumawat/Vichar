@@ -6,6 +6,7 @@ import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 import { SharedService } from '../../service/shared.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HeaderBlogComponent } from '../header-blog/header-blog.component';
 export const QuillConfiguration = {
   toolbar: [
     [{ header: [1, 2, 3, 4, 5, 6, false] }],
@@ -24,7 +25,7 @@ export const QuillConfiguration = {
 @Component({
   selector: 'app-update-blog',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, QuillModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, QuillModule,HeaderBlogComponent],
   templateUrl: './update-blog.component.html',
   styleUrl: './update-blog.component.css',
 })

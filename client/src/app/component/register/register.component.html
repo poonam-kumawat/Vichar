@@ -1,4 +1,55 @@
-<form [formGroup]="registeration">
+<div class="bg-[rgb(255,244,245)] h-screen">
+    <div class="flex justify-center items-center">
+        <div class="bg-[#fff] w-[500px] p-10 absolute top-[100px] shadow-md rounded-md">
+            <div class="grid gap-4 justify-center">
+                <div class="flex justify-center items-center"><img src="../../../assets/images/vichar.png"
+                        class="h-[30px] text-center"></div>
+                <p class="text-center text-[18px] text-[#828282]">Where Thoughts Take Flight. Your Journey Begins with Vichar!
+                </p>
+            </div>
+            <div class="mt-6">
+            <form [formGroup]="registeration">
+
+                <div class="grid gap-4">
+                    <div class="grid gap-1">
+                <input class="focus:outline-none border-[1px] p-2 rounded-[5px] border-[#ddd]" formControlName="name" type="text" placeholder="Name">
+                <p *ngIf="registeration.hasError('required','name') && registeration.controls['name'].dirty"
+                    style="color:red">required</p>
+                    </div>
+                <div class="grid gap-1">
+                <input class="focus:outline-none border-[1px] p-2 rounded-[5px] border-[#ddd]" formControlName="email" type="email" placeholder="Email">
+                <p *ngIf="registeration.hasError('required','email') && registeration.controls['email'].dirty"
+                    style="color:red">required</p>
+                <p *ngIf="registeration.hasError('email','email') " style="color:red">email is invalid</p>
+                </div>
+
+<div class="grid gap-1">
+                <input class="focus:outline-none border-[1px] p-2 rounded-[5px] border-[#ddd]" formControlName="password" type="password" placeholder="Password">
+                <p *ngIf="registeration.hasError('required','password') && registeration.controls['password'].dirty"
+                    style="color:red">required</p>
+</div>
+            <div class="grid gap-1">
+                <input class="focus:outline-none border-[1px] p-2 rounded-[5px] border-[#ddd]" formControlName="confirmPassword" type="password" placeholder="Confirm Password">
+                <p
+                    *ngIf="registeration.hasError('required','confirmPassword') && registeration.controls['confirmPassword'].dirty"
+                    style="color:red">required</p>
+                <p *ngIf="registeration.hasError('confirmPasswordValidator','confirmPassword') " style="color:red">password did
+                    not match</p>
+            </div>
+                <button class="bg-[#ff6481] hover:bg-[#282424] text-white font-bold py-2 px-4 rounded" (click)="register()" type="submit">Submit</button>
+                </div>
+            </form>
+    
+            </div>
+       
+            <p class="text-center text-[14px] mt-4">Already have account? <span
+                    class="text-[#ff6481] underline cursor-pointer" (click)="onLogin()">Login Vichar</span></p>
+        </div>
+    
+    </div>
+    </div>
+
+<!-- <form [formGroup]="registeration">
     <input formControlName="name" type="text" placeholder="Name"><br><br>
    <span *ngIf="registeration.hasError('required','name') && registeration.controls['name'].dirty" style="color:red">required</span><br><br>
     <input formControlName="email" type="email" placeholder="Email"><br><br>
@@ -11,4 +62,4 @@
     <span *ngIf="registeration.hasError('confirmPasswordValidator','confirmPassword') " style="color:red">password did not match</span><br><br>
     
 <button (click)="register()" type="submit">Submit</button>
-</form>
+</form> -->

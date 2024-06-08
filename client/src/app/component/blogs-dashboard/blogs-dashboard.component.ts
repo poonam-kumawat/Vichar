@@ -12,7 +12,11 @@ import { Router } from '@angular/router';
   styleUrl: './blogs-dashboard.component.css',
 })
 export class BlogsDashboardComponent implements OnInit {
-  constructor(private renderer: Renderer2,private sharedService: SharedService, private router: Router) {}
+  constructor(
+    private renderer: Renderer2,
+    private sharedService: SharedService,
+    private router: Router
+  ) {}
   ngOnInit(): void {
     this.ongetBlogs();
   }
@@ -39,5 +43,11 @@ export class BlogsDashboardComponent implements OnInit {
     } else {
       this.renderer.removeClass(header, 'fixed');
     }
+  }
+  onLogin() {
+    this.router.navigate(['login'])
+  }
+  onSignUp(){
+this.router.navigate(['register']);
   }
 }

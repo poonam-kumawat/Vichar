@@ -16,7 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 export class RegisterComponent implements OnInit {
   fb = inject(FormBuilder);
   route = inject(Router);
-  constructor(private sharedService: SharedService) {}
+  constructor(private sharedService: SharedService,private router:Router) {}
   registeration!: FormGroup;
   ngOnInit(): void {
     this.registeration = this.fb.group(
@@ -38,12 +38,15 @@ export class RegisterComponent implements OnInit {
   register() {
     this.sharedService.registerApi(this.registeration.value).subscribe({
       next: (res) => {
-        alert('user Created');
-        this.route.navigate(['/login']);
+       
+        this.route.navigate(['login']);
       },
       error: (err) => {
         console.log(err);
       },
     });
+  }
+  onLogin(){
+     this.router.navigate(['login']);
   }
 }

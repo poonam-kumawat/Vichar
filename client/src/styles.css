@@ -29,3 +29,14 @@
     @apply font-semibold;
   }
 }
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #ddd; 
+    border-radius: 10px;
+  }

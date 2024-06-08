@@ -28,3 +28,40 @@
 ::ng-deep blockquote, ::ng-deep dl, ::ng-deep dd, ::ng-deep h1,  ::ng-deep h2,::ng-deep  h3, ::ng-deep h4, ::ng-deep h5, ::ng-deep h6, ::ng-deep hr, ::ng-deep figure {
     margin: 15px  0 !important;
 }
+::ng-deep .ql-snow.ql-toolbar button, ::ng-deep .ql-snow .ql-toolbar button {
+    height: 36px !important;
+    width: 61px !important;
+}
+::ng-deep .ql-snow .ql-picker.ql-header {
+    width: 146px !important;
+}
+ 
+::ng-deep .ql-toolbar.ql-snow {
+ border: unset !important;
+}
+
+
+::ng-deep .ql-container.ql-snow {
+    border: unset !important;
+}
+::ng-deep .ql-editor p{
+    font-size: 20px;
+}
+
+::ng-deep .ql-snow .ql-picker {
+    font-size: 18px !important;
+    border: 1px solid #ddd;
+    height: 30px !important;
+}
+
+::ng-deep .ql-toolbar.ql-snow{
+    position: sticky;
+    top: 72px;
+    padding: 10px;
+    background: white;
+    z-index: 5;
+}
+
+::ng-deep.ql-snow.ql-toolbar button:hover, ::ng-deep.ql-snow .ql-toolbar button:hover, ::ng-deep.ql-snow.ql-toolbar button:focus, ::ng-deep.ql-snow .ql-toolbar button:focus, ::ng-deep.ql-snow.ql-toolbar button.ql-active, ::ng-deep.ql-snow .ql-toolbar button.ql-active, ::ng-deep.ql-snow.ql-toolbar .ql-picker-label:hover, ::ng-deep.ql-snow .ql-toolbar .ql-picker-label:hover, ::ng-deep.ql-snow.ql-toolbar .ql-picker-label.ql-active, ::ng-deep.ql-snow .ql-toolbar .ql-picker-label.ql-active, ::ng-deep.ql-snow.ql-toolbar .ql-picker-item:hover, ::ng-deep.ql-snow .ql-toolbar .ql-picker-item:hover, ::ng-deep.ql-snow.ql-toolbar .ql-picker-item.ql-selected, ::ng-deep.ql-snow .ql-toolbar .ql-picker-item.ql-selected {
+    color: #ff6481 !important;
+}

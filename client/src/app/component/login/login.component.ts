@@ -33,14 +33,10 @@ export class LoginComponent implements OnInit {
         size: 'large',
       });
     }
-      this.loginForm = this.fb.group({
-        email: [
-          '',
-          Validators.compose([Validators.required, Validators.email]),
-        ],
-        password: ['', Validators.required],
-      });
-    
+    this.loginForm = this.fb.group({
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      password: ['', Validators.required],
+    });
   }
   handleGoogleSignIn(response: any) {
     this.sharedService.googleLoginApi(response.credential).subscribe(
@@ -57,12 +53,14 @@ export class LoginComponent implements OnInit {
     console.log(this.loginForm.value);
     this.sharedService.loginApi(this.loginForm.value).subscribe({
       next: (res) => {
-        alert('user Login successfully');
+       this.router.navigate(['blog']);
       },
       error: (err) => {
         console.log(err);
       },
     });
   }
-
+  onResgister(){
+    this.router.navigate(['register'])
+  }
 }

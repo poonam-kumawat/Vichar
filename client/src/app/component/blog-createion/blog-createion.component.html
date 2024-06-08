@@ -1,8 +1,10 @@
+<app-header-blog></app-header-blog>
+
 <div class="blogCreation">
   <div class="max-w-[1330px] m-auto mt-24 p-8">
     <div class="grid mx-40 gap-4">
     <input class="text-4xl focus:outline-none" type="text" placeholder="Title..." [(ngModel)]="titleText" />
-     <quill-editor class="content-editor h-96 mb-12" [placeholder]="''" [modules]="quillConfiguration" [(ngModel)]="htmlText"
+     <quill-editor class="content-editor mb-12" [placeholder]="''" [modules]="quillConfiguration" [(ngModel)]="htmlText"
     (onSelectionChanged)="onSelectionChanged($event)" (onContentChanged)="onContentChanged($event)">
   </quill-editor>
   <div class="flex justify-between">

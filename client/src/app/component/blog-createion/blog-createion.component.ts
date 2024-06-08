@@ -7,6 +7,7 @@ import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 import { SharedService } from '../../service/shared.service';
 import { Router } from '@angular/router';
+import { HeaderBlogComponent } from '../header-blog/header-blog.component';
 
 export const QuillConfiguration = {
   toolbar: [
@@ -22,11 +23,10 @@ export const QuillConfiguration = {
     ['clean'],
   ],
 };
-
 @Component({
   selector: 'app-blog-createion',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, QuillModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, QuillModule,HeaderBlogComponent],
   templateUrl: './blog-createion.component.html',
   styleUrl: './blog-createion.component.css',
 })

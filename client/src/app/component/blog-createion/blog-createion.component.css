@@ -3,3 +3,37 @@
     color: #333 !important;
     overflow: visible;
 }
+
+::ng-deep .ql-snow.ql-toolbar button, ::ng-deep .ql-snow .ql-toolbar button {
+    height: 36px !important;
+    width: 61px !important;
+}
+::ng-deep .ql-snow .ql-picker.ql-header {
+    width: 146px !important;
+}
+ 
+::ng-deep .ql-toolbar.ql-snow {
+ border: unset !important;
+}
+
+
+::ng-deep .ql-container.ql-snow {
+    border: unset !important;
+}
+::ng-deep .ql-editor p{
+    font-size: 20px;
+}
+
+::ng-deep .ql-snow .ql-picker {
+    font-size: 18px !important;
+    border: 1px solid #ddd;
+    height: 30px !important;
+}
+::ng-deep .ql-toolbar.ql-snow{
+    position: sticky;
+    top: 72px;
+    padding: 10px;
+    background: white;
+    z-index: 5;
+}
+
