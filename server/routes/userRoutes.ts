@@ -74,7 +74,6 @@ userRouter.route("/login").post(async (req: Request, res: Response) => {
 userRouter.route("/login/google").post(async (req: Request, res: Response) => {
   try {
     const { token } = req.body;
-
     const ticket = await client.verifyIdToken({
       idToken: token,
       audience: process.env.GOOGLE_CLIENT_ID,
