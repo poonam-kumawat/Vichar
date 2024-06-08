@@ -6,16 +6,19 @@ import { QuillModule } from 'ngx-quill';
 import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 import { SharedService } from '../../service/shared.service';
+import { Router } from '@angular/router';
 
 export const QuillConfiguration = {
   toolbar: [
+    [{ header: [1, 2, 3, 4, 5, 6, false] }],
     ['bold', 'italic', 'underline', 'strike'],
     ['blockquote', 'code-block'],
-    [{ header: 1 }, { header: 2 }],
+    // [{ header: 1 }, { header: 2 }],
     // [{ color: [] }, { background: [] }],
     // ['image'],
     // ['link'],
     ['link', 'image', 'video'],
+
     ['clean'],
   ],
 };
@@ -31,7 +34,7 @@ export class BlogCreateionComponent {
   quillConfiguration = QuillConfiguration;
   htmlText: any;
   titleText: any;
-  constructor(private sharedService: SharedService) {}
+  constructor(private sharedService: SharedService,private router:Router) {}
   onSelectionChanged = (event: any) => {
     if (event.oldRange == null) {
       this.onFocus();
@@ -58,7 +61,10 @@ export class BlogCreateionComponent {
       type: this.SelectedValue,
       description: this.editorText,
     };
-    this.sharedService.blogCreateApi(object).subscribe();
+    this.sharedService.blogCreateApi(object).subscribe((res:any)=>{
+      this.router.navigate(['/blog'])
+
+    });
   }
   SelectedValue: any;
   fileImage:any;

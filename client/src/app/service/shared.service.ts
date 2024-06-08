@@ -28,9 +28,20 @@ export class SharedService {
   }
 
   blogCreateApi(body: any) {
-    return this.http.post<any>(`${ApiEndPont.BOLG_API}create`, 
-      body,
-    );
+    return this.http.post<any>(`${ApiEndPont.BOLG_API}create`, body);
+  }
+  getBlogApi() {
+    return this.http.get<any>(`${ApiEndPont.BOLG_API}blogs`);
+  }
+  deleteBlogApi(filter: any) {
+    return this.http.delete<any>(`${ApiEndPont.BOLG_API}${filter}`);
+  }
+  editBlogApi(filter: any) {
+    return this.http.put<any>(`${ApiEndPont.BOLG_API}edit`, filter);
+  }
+  detailBlogApi(id: any) {
+    
+    return this.http.post<any>(`${ApiEndPont.BOLG_API}details`, id);
   }
 }
 

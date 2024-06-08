@@ -1,0 +1,30 @@
+::ng-deep .ql-snow .ql-editor pre.ql-syntax {
+    background-color: #f5f5f5  !important;
+    color: #333 !important;
+    overflow: visible;
+}
+::ng-deep .ql-syntax{
+    background: #f5f5f5;
+    padding: 30px;
+    border-radius: 5px;
+}
+::ng-deep blockquote{
+    border-left: 4px solid #ccc;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-left: 16px;
+}
+
+::ng-deep a{
+    text-decoration: underline;
+    font-style: italic;
+}
+
+::ng-deep ol, ::ng-deep ul, ::ng-deep menu {
+    list-style: auto !important;
+    padding-left: 25px;
+    line-height: 2;
+}
+::ng-deep blockquote, ::ng-deep dl, ::ng-deep dd, ::ng-deep h1,  ::ng-deep h2,::ng-deep  h3, ::ng-deep h4, ::ng-deep h5, ::ng-deep h6, ::ng-deep hr, ::ng-deep figure {
+    margin: 15px  0 !important;
+}

@@ -1,14 +1,38 @@
-<p>blog-createion works!</p>
-<input type="text" placeholder="title" [(ngModel)]="titleText"/>
+<div class="blogCreation">
+  <div class="max-w-[1330px] m-auto mt-24 p-8">
+    <div class="grid mx-40 gap-4">
+    <input class="text-4xl focus:outline-none" type="text" placeholder="Title..." [(ngModel)]="titleText" />
+     <quill-editor class="content-editor h-96 mb-12" [placeholder]="''" [modules]="quillConfiguration" [(ngModel)]="htmlText"
+    (onSelectionChanged)="onSelectionChanged($event)" (onContentChanged)="onContentChanged($event)">
+  </quill-editor>
+  <div class="flex justify-between">
+    <select class="border-2 border-[#ddd] rounded-[5px]  w-80 focus:outline-none text-2xl" [(ngModel)]="SelectedValue" (change)="onSelectValue($event)" placeholder="Type">
+      <option value="Travel">Travel</option>
+      <option value="Food">Food</option>
+      <option value="Nature">Nature</option>
+      <option value="Technical">Technical</option>
+    </select>
+  </div>
+  <button  class="bg-[#ff6481] hover:bg-[#282424] text-white font-bold py-2 px-4 rounded" type="button" (click)="onBlogSubmit()">Create</button>
+
+  </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- <input type="text" placeholder="title" [(ngModel)]="titleText"/>
 <select [(ngModel)]="SelectedValue" (change)="onSelectValue($event)" >
   <option value="Travel">Travel</option>
   <option value="Food">Food</option>
   <option value="Nature">Nature</option>
   <option value="Technical">Technical</option>
 </select>
-<!-- <select [(ngModel)]="model">
-  <option *ngFor="let item of list" [value]="item">{{item}}</option>
-</select> -->
+
 <input type="file" accept="" [(ngModel)]="fileImage"/>
 
 <quill-editor class="content-editor" [placeholder]="''" [modules]="quillConfiguration" [(ngModel)]="htmlText" (onSelectionChanged)="onSelectionChanged($event)"
@@ -17,4 +41,9 @@
 
 <button type="button" (click)="onBlogSubmit()">Sumbit</button>
 
-<div>{{fileImage}}</div>
+<div>{{fileImage}}</div> -->
+
+
+<!-- <select [(ngModel)]="model">
+  <option *ngFor="let item of list" [value]="item">{{item}}</option>
+</select> -->
