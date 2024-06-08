@@ -22,7 +22,7 @@ return res.status(200).json(blogCreation);
 })
 
 blogRouter.route("/blogs").get(async(req:Request,res:Response)=>{
-    const result=await blogSchema.find({});
+    const result = await blogSchema.find({}).sort({ timeStamp: -1 });
     return res.status(200).json(result);
 })
 
