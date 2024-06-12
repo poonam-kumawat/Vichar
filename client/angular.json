@@ -25,10 +25,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
-             
+              "src/styles.css",
+             "./node_modules/quill/dist/quill.snow.css",
+             "./node_modules/quill/dist/quill.core.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "./node_modules/quill/dist/quill.min.js",
+              "./node_modules/quill/dist/quill.js"
+            ],
             "server": "src/main.server.ts",
             "prerender": true,
             "ssr": {
@@ -54,7 +58,9 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "ssr": false, 
+              "prerender": false
             }
           },
           "defaultConfiguration": "production"
