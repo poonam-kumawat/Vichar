@@ -5,6 +5,7 @@ import * as jwt from "jsonwebtoken";
 import { CreateError } from "../utils/error";
 import { CreateSuccess } from "../utils/success";
 import { OAuth2Client } from "google-auth-library";
+import mongoose from "mongoose";
 const userRouter = express.Router();
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
@@ -119,5 +120,39 @@ userRouter.route("/login/google").post(async (req: Request, res: Response) => {
     });
   }
 });
+ 
+
+userRouter.route("/profile/:id").get(async (req: Request, res: Response) => {
+  try {
+    const id = new mongoose.Types.ObjectId(req.params.id);
+    const userProfile = await user.aggregate(
+      [
+        {
+          $match: {
+            _id: id,
+          },
+        },
+        {
+          $lookup: {
+            from: "blogs",
+            localField: "_id",
+            foreignField: "creator",
+            as: "blogsData",
+          },
+        },
+        // { $unwind: { path: "$blogsData" } },
+      ],
+      
+    );
+    return res.status(200).json(userProfile);
+    
+  } catch (error:any) {
+     return res.status(500).json({ error: error.message });
+    
+  }
+  
+
+})
+
 
 export default userRouter;

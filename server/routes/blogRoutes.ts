@@ -1,6 +1,7 @@
 import express, { Request, Response, Router, response } from "express";
 import blog from "../models/blog";
 import blogSchema from "../models/blog"
+import user from "../models/user";
 
 
 const blogRouter=express.Router();
@@ -10,7 +11,8 @@ blogRouter.route("/create").post(async(req:Request,res:Response)=>{
         const createBlog=new blog({
             title:req.body.title,
             type:req.body.type,
-            description:req.body.description
+            description:req.body.description,
+            creator:req.body.creator,
         });
         const blogCreation = await blogSchema.create(createBlog)
         // await createBlog.save();
@@ -21,10 +23,42 @@ return res.status(200).json(blogCreation);
     }
 })
 
-blogRouter.route("/blogs").get(async(req:Request,res:Response)=>{
-    const result = await blogSchema.find({}).sort({ timeStamp: -1 });
-    return res.status(200).json(result);
-})
+// blogRouter.route("/blogs").get(async(req:Request,res:Response)=>{
+//     const result = await blogSchema.find({}).sort({ timeStamp: -1 });
+//     return res.status(200).json(result);
+// })
+blogRouter.route("/blogs").get(async (req: Request, res: Response) => {
+  try {
+    const blogs = await blog.aggregate([
+      {
+        $lookup: {
+          from: "users", 
+          localField: "creator",
+          foreignField: "_id",
+          as: "userDetails",
+        },
+      },
+      {
+        $unwind: "$userDetails", 
+      },
+      {
+        $project: {
+          title: 1,
+          type: 1,
+          description: 1,
+          timeStamp: 1,
+          "userDetails.email": 1,
+          "userDetails.name": 1,
+          "userDetails.timeStamp": 1,
+        },
+      },
+    ]);
+
+    res.status(200).json(blogs);
+  } catch (err:any) {
+    res.status(500).json({ message: err.message });
+  }
+});
 
 blogRouter.route("/:id").delete(async(req:Request,res:Response)=>{
     try {
@@ -64,5 +98,7 @@ blogRouter.route("/details").post(async(req:Request,res:Response)=>{
         
     }
 })
+
+blogRouter.route("/blogs/:id").get(async(req:Request,res:Response)=>{})
 
 export default blogRouter;

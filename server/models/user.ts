@@ -1,10 +1,11 @@
-import { Schema, model} from "mongoose";
+import mongoose, { ObjectId, Schema, model} from "mongoose";
 
 interface user {
   email: string;
   name: string;
   password: string;
   timeStamp: Date;
+  blogs:[ObjectId]
 }
 
 const userSchema = new Schema<user>(
@@ -13,6 +14,7 @@ const userSchema = new Schema<user>(
     name: { type: String, required: true },
     password: { type: String },
     timeStamp: { type: Date, default: Date.now },
+    blogs:{type:[mongoose.Types.ObjectId], ref:"Blog"}
   },
   { versionKey: false }
 );
