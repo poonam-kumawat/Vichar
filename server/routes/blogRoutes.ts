@@ -2,6 +2,7 @@ import express, { Request, Response, Router, response } from "express";
 import blog from "../models/blog";
 import blogSchema from "../models/blog"
 import user from "../models/user";
+import multer from "multer";
 
 
 const blogRouter=express.Router();
@@ -22,6 +23,24 @@ return res.status(200).json(blogCreation);
         
     }
 })
+const upload = multer({ dest: "uploads/" });
+blogRouter.route("/upload").post(upload.single('file'),async (req: Request, res: Response) => {
+  try {
+ const file = req.file;
+ console.log(file);
+    return res.status(200).json({
+      success: true,
+      message: "Image uploaded successfully",
+      url: `http://localhost:5000/uploads/${file?.filename}`,
+    });
+  } catch (error) {
+    // Handle errors
+    console.error("Error uploading image:", error);
+    return res
+      .status(500)
+      .json({ success: false, message: "Internal server error" });
+  }
+});
 
 // blogRouter.route("/blogs").get(async(req:Request,res:Response)=>{
 //     const result = await blogSchema.find({}).sort({ timeStamp: -1 });
