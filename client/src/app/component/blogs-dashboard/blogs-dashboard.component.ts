@@ -3,6 +3,7 @@ import { SharedService } from '../../service/shared.service';
 import { CommonModule } from '@angular/common';
 import { parse } from 'angular-html-parser';
 import { Router } from '@angular/router';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-blogs-dashboard',
@@ -15,7 +16,8 @@ export class BlogsDashboardComponent implements OnInit {
   constructor(
     private renderer: Renderer2,
     private sharedService: SharedService,
-    private router: Router
+    private router: Router,
+    public authService: AuthService
   ) {}
   ngOnInit(): void {
     this.ongetBlogs();
@@ -32,8 +34,20 @@ export class BlogsDashboardComponent implements OnInit {
   OnNavigate(id: any) {
     this.router.navigate([`/update`, id]);
   }
+  onProfileView() {
+    if (this.authService.isLoggedIn()) {
+      const id = this.authService.getUserId();
+      this.router.navigate([`/profile`, id]);
+    } else {
+      this.router.navigate([`/login`]);
+    }
+  }
   onNewBlog() {
-    this.router.navigate([`/create-blog`]);
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate([`/create-blog`]);
+    } else {
+      this.router.navigate([`/login`]);
+    }
   }
   @HostListener('window:scroll', [])
   onWindowScroll(): void {
@@ -45,9 +59,14 @@ export class BlogsDashboardComponent implements OnInit {
     }
   }
   onLogin() {
-    this.router.navigate(['login'])
+    this.router.navigate(['login']);
   }
-  onSignUp(){
-this.router.navigate(['register']);
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['login']);
+  }
+  onSignUp() {
+    this.router.navigate(['register']);
   }
 }

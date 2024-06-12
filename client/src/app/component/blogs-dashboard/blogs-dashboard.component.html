@@ -15,9 +15,12 @@
                 <div class="flex justify-between items-center">
                     <img src="../../../assets/images/vichar.png" class="h-[30px]">
                     <div class="flex justify-center gap-4 items-center">
-                        <p class="text-[#ff6481] hover:text-[#282424] text-2xl font-bold  cursor-pointer hover:scale-105 hover:ease-in hover:duration-300" (click)="onLogin()">Login</p>
-                        <p class="text-[#ff6481] hover:text-[#282424] text-2xl font-bold  cursor-pointer hover:scale-105 hover:ease-in hover:duration-300" (click)="onSignUp()">Sign Up</p>
-                    <svg class="w-[30px] h-[30px] fill-[#ff6481]  cursor-pointer hover:fill-[#282424]">
+                        <p *ngIf="!authService.isLoggedIn()" class="text-[#ff6481] hover:text-[#282424] text-2xl font-bold  cursor-pointer hover:scale-105 hover:ease-in hover:duration-300" (click)="onLogin()">Login</p>
+                                                <p *ngIf="authService.isLoggedIn()" class="text-[#ff6481] hover:text-[#282424] text-2xl font-bold  cursor-pointer hover:scale-105 hover:ease-in hover:duration-300"
+                                                    (click)="logout()">logout</p>
+
+                        <p class="text-[#ff6481] hover:text-[#282424] text-2xl font-bold  cursor-pointer hover:scale-105 hover:ease-in hover:duration-300" (click)="onSignUp()" *ngIf="!authService.isLoggedIn()">Sign Up</p>
+                    <svg class="w-[30px] h-[30px] fill-[#ff6481]  cursor-pointer hover:fill-[#282424]" (click)="onProfileView()">
                         <use href="../../../assets/images/account-circle.svg#account"></use>
                     </svg>
                     </div>
@@ -54,6 +57,10 @@
                             <div class="max-h-[70px] textEllipse  mb-4 text-ellipsis overflow-hidden" [innerHtml]="blog.description"></div>
                             <div class="flex">
                             <p class="bg-[#e4e4e4] px-4 py-1 rounded-[50px]">{{blog.type}}</p>
+                            <p>{{blog.userDetails.name}}</p>
+                            <p>{{blog.userDetails.timeStamp | date}}</p>
+
+                            
                             </div>
                         </div>                     
                         

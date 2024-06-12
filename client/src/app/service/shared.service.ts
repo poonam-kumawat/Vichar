@@ -40,8 +40,10 @@ export class SharedService {
     return this.http.put<any>(`${ApiEndPont.BOLG_API}edit`, filter);
   }
   detailBlogApi(id: any) {
-    
     return this.http.post<any>(`${ApiEndPont.BOLG_API}details`, id);
+  }
+  getProfileApi(id:any) {
+    return this.http.get<any>(`${ApiEndPont.REGISTER_POST_API}profile/${id}`);
   }
 }
 

@@ -61,7 +61,6 @@ export class UpdateBlogComponent implements OnInit {
     };
     this.sharedService.detailBlogApi(body).subscribe((res: Response) => {
       this.detailBlog = res;
-      console.log(this.detailBlog);
       const blogDetail = this.detailBlog.find((item: any) => item._id === id);
       if (blogDetail) {
         this.idDelete = blogDetail._id;

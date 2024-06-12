@@ -8,6 +8,7 @@ import 'quill/dist/quill.snow.css';
 import { SharedService } from '../../service/shared.service';
 import { Router } from '@angular/router';
 import { HeaderBlogComponent } from '../header-blog/header-blog.component';
+import { AuthService } from '../../service/auth.service';
 
 export const QuillConfiguration = {
   toolbar: [
@@ -26,7 +27,13 @@ export const QuillConfiguration = {
 @Component({
   selector: 'app-blog-createion',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, QuillModule,HeaderBlogComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    QuillModule,
+    HeaderBlogComponent,
+  ],
   templateUrl: './blog-createion.component.html',
   styleUrl: './blog-createion.component.css',
 })
@@ -34,7 +41,7 @@ export class BlogCreateionComponent {
   quillConfiguration = QuillConfiguration;
   htmlText: any;
   titleText: any;
-  constructor(private sharedService: SharedService,private router:Router) {}
+  constructor(private sharedService: SharedService, private router: Router,private authService:AuthService) {}
   onSelectionChanged = (event: any) => {
     if (event.oldRange == null) {
       this.onFocus();
@@ -55,19 +62,17 @@ export class BlogCreateionComponent {
     console.log('Blurred');
   };
   onBlogSubmit() {
-    console.log(this.fileImage)
     const object = {
       title: this.titleText,
       type: this.SelectedValue,
       description: this.editorText,
+      creator: this.authService.getUserId(),
     };
-    this.sharedService.blogCreateApi(object).subscribe((res:any)=>{
-      this.router.navigate(['/blog'])
-
+    this.sharedService.blogCreateApi(object).subscribe((res: any) => {
+      this.router.navigate(['/blog']);
     });
   }
   SelectedValue: any;
-  fileImage:any;
-  onSelectValue(e: any) {
-  }
+  fileImage: any;
+  onSelectValue(e: any) {}
 }
