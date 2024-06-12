@@ -4,6 +4,8 @@ import { connectToMongo } from "./conn";
 import cors from "cors";
 import userRouter from "./routes/userRoutes";
 import cookieParser from "cookie-parser";
+import quillRouter from "./routes/quillRoutes";
+import path from "path";
 
 dotenv.config();
 
@@ -21,7 +23,9 @@ app.use(express.static("public"));
 app.use(cors(options));
 app.use(express.json());
 app.use(cookieParser())
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/user", userRouter);
+app.use("/api/quill", quillRouter);
 
 
 //Response  handleer
