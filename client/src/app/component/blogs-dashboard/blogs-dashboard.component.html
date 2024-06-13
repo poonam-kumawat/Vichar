@@ -50,17 +50,15 @@
                 <ng-container *ngFor="let blog of blogsData;let i=index">
                     <div class="hover:scale-105 hover:ease-in hover:duration-300  cursor-pointer grid gap-4 border-2 border-[#feeae] rounded-[10px] p-2 mt-8" (click)="OnNavigate(blog._id)">
                         <div class="cursor-pointer">
-                            <img class="object-cover  rounded-[10px] " src="../../../assets/images/Group 4.png" alt="image" />
+                            <img class="object-cover h-[200px] w-full rounded-[10px] " [src]="blog.images[0]" alt="image" />
                         </div>
                         <div class="p-6 w-96">
                             <p class="cursor-pointer text-2xl font-bold mb-2 text-[#282424]">{{blog.title}}</p>                            
-                            <div class="max-h-[70px] textEllipse  mb-4 text-ellipsis overflow-hidden" [innerHtml]="blog.description"></div>
+                            <div class="max-h-[70px] textEllipse  mb-4 text-ellipsis overflow-hidden">{{blog.subtitle}}</div>
                             <div class="flex">
                             <p class="bg-[#e4e4e4] px-4 py-1 rounded-[50px]">{{blog.type}}</p>
                             <p>{{blog.userDetails.name}}</p>
-                            <p>{{blog.userDetails.timeStamp | date}}</p>
-
-                            
+                            <p>{{blog.timeStamp | date}}</p>                            
                             </div>
                         </div>                     
                         

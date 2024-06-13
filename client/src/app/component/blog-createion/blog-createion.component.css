@@ -37,3 +37,7 @@
     z-index: 5;
 }
 
+::ng-deep.ql-snow .ql-editor img {
+    max-width: 100%;
+    margin: auto;
+}

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { parse } from 'angular-html-parser';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-blogs-dashboard',
@@ -17,7 +18,8 @@ export class BlogsDashboardComponent implements OnInit {
     private renderer: Renderer2,
     private sharedService: SharedService,
     private router: Router,
-    public authService: AuthService
+    public authService: AuthService,
+ 
   ) {}
   ngOnInit(): void {
     this.ongetBlogs();
@@ -69,4 +71,6 @@ export class BlogsDashboardComponent implements OnInit {
   onSignUp() {
     this.router.navigate(['register']);
   }
+ 
+ 
 }

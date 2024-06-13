@@ -64,7 +64,7 @@ export class BlogCreateionComponent implements OnInit {
               file.type === 'image/jpg'
             ) {
               // File types supported for image
-              if (file.size < 1000000) {
+              if (file.size < 100000000) {
                 const uploadData = new FormData();
                 console.log('>>>', uploadData);
                 uploadData.append('file', file, file.name);
@@ -76,6 +76,7 @@ export class BlogCreateionComponent implements OnInit {
                   .toPromise()
                   .then((result: any) => {
                     console.log(result);
+                    this.uploadedImageURLs.push(result.url);
                     resolve(result.url);
                   })
                   .catch((error: any) => {
@@ -144,6 +145,7 @@ export class BlogCreateionComponent implements OnInit {
       type: this.SelectedValue,
       description: this.editorText,
       creator: this.authService.getUserId(),
+      images:this.uploadedImageURLs
     };
     this.sharedService.blogCreateApi(object).subscribe((res: any) => {
       this.router.navigate(['/blog']);
@@ -152,4 +154,6 @@ export class BlogCreateionComponent implements OnInit {
   SelectedValue: any;
   fileImage: any;
   onSelectValue(e: any) {}
+
+  
 }

@@ -18,11 +18,11 @@
                     </div>                    
 
                 </div>
-                <div *ngIf="!isupdate">
+                <div class="mb-40" *ngIf="!isupdate">
                     <div *ngFor="let detail of detailBlog">
                         <p class="text-2xl text-[#828282] mb-6">{{detail.type | uppercase }}</p>
                         <p class="text-5xl font-bold mb-6">{{detail.title}}</p>
-                        <img class="object-cover  rounded-[10px] " src="../../../assets/images/Group 4.png" alt="image" />
+                        <!-- <img class="object-cover  rounded-[10px] " src="../../../assets/images/Group 4.png" alt="image" /> -->
 
                         <div class="mt-6" [innerHtml]="detail.description"></div>
                     </div>
