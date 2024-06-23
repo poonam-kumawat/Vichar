@@ -6,8 +6,14 @@ import { CreateError } from "../utils/error";
 import { CreateSuccess } from "../utils/success";
 import { OAuth2Client } from "google-auth-library";
 import mongoose from "mongoose";
+import path from "path";
+import ImageKit from "imagekit";
+import { v4 as uuidv4 } from "uuid";
+import multer from "multer";
 const userRouter = express.Router();
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+import dotenv from "dotenv";
+dotenv.config();
 
 
 userRouter
@@ -152,6 +158,48 @@ userRouter.route("/profile/:id").get(async (req: Request, res: Response) => {
   }
   
 
+})
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
+const imagekit = new ImageKit({
+  publicKey: process.env.IMAGEKITPUBLICKEY!,
+  privateKey: process.env.IMAGEKITPRIVATEKEY!,
+  urlEndpoint: process.env.IMAGEKITURLPOINT!,
+});
+userRouter
+  .route("/upload/profile")
+  .post(upload.single("file"), async (req: Request, res: Response) => {
+    try {
+      const file = req.file;
+      if (!file) {
+        return res.status(400).send("No file uploaded");
+      }
+      const uploadResponse = await imagekit.upload({
+        file: file.buffer,
+        fileName: `${uuidv4()}${path.extname(file.originalname)}`,
+        folder: "/profileImage",
+      });
+      return res.status(200).json({ url: uploadResponse.url });
+    } catch (error) {
+      // Handle errors
+      console.error("Error uploading image:", error);
+      return res
+        .status(500)
+        .json({ success: false, message: "Internal server error" });
+    }
+  });
+userRouter.route("/edit/profile").put(async(req:Request,res:Response)=>{
+   try {
+     const filter = req.body;
+     if (filter.id === undefined) throw new Error("Id is required!");
+     const data = await user.findByIdAndUpdate(filter.id, filter, {
+       upsert: false,
+     });
+     return res.status(200).json(data);
+   } catch (error: any) {
+     return res.status(500).json({ error: error.message });
+   }
 })
 
 
