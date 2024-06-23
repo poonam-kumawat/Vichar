@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { QuillModule } from 'ngx-quill';
@@ -13,22 +13,9 @@ import Quill from 'quill';
 import { ImageHandler, Options } from 'ngx-quill-upload';
 import { HttpClient } from '@angular/common/http';
 import { resourceLimits } from 'worker_threads';
+import { AutoResizeDirective } from '../../directives/auto-resize.directive';
 Quill.register('modules/imageHandler', ImageHandler);
 
-// export const QuillConfiguration = {
-//   toolbar: [
-//     [{ header: [1, 2, 3, 4, 5, 6, false] }],
-//     ['bold', 'italic', 'underline', 'strike'],
-//     ['blockquote', 'code-block'],
-//     // [{ header: 1 }, { header: 2 }],
-//     // [{ color: [] }, { background: [] }],
-//     // ['image'],
-//     // ['link'],
-//     ['link', 'image', 'video'],
-
-//     ['clean'],
-//   ],
-// };
 @Component({
   selector: 'app-blog-createion',
   standalone: true,
@@ -38,6 +25,7 @@ Quill.register('modules/imageHandler', ImageHandler);
     ReactiveFormsModule,
     QuillModule,
     HeaderBlogComponent,
+    AutoResizeDirective,
   ],
   templateUrl: './blog-createion.component.html',
   styleUrl: './blog-createion.component.css',
@@ -50,9 +38,12 @@ export class BlogCreateionComponent implements OnInit {
     this.quillConfiguration = {
       toolbar: [
         [{ header: [1, 2, 3, 4, 5, 6, false] }],
-        ['bold', 'italic', 'underline', 'strike'],
-        ['blockquote', 'code-block'],
-        ['link', 'image', 'video'],
+        ['bold'],
+        ['italic'],
+        ['underline', 'strike'],
+        ['blockquote'],
+        ['code-block'],
+        ['link', 'image'],
         ['clean'],
       ],
       imageHandler: {
@@ -97,7 +88,7 @@ export class BlogCreateionComponent implements OnInit {
         fetch: (url: string, callback: Function) => {
           this.http.get(url).subscribe(
             (res: any) => {
-              console.log("<<<<<",res.url)
+              console.log('<<<<<', res.url);
               callback(res.url);
             },
             (error: any) => {
@@ -109,10 +100,9 @@ export class BlogCreateionComponent implements OnInit {
         accepts: ['png', 'jpg', 'jpeg', 'jfif'],
       } as Options,
     };
-    
   }
   htmlText: any;
-  titleText: any;
+  titleText: any = '';
   constructor(
     private sharedService: SharedService,
     private router: Router,
@@ -127,11 +117,11 @@ export class BlogCreateionComponent implements OnInit {
     }
   };
 
-  editorText: any;
+  editorText: any = '';
   onContentChanged = (event: any) => {
     this.editorText = event.html;
     this.editorText = this.editorText.replace(/src="blob:/g, 'src="');
-    console.log(this.editorText)
+    console.log(this.editorText);
   };
   onFocus = () => {
     console.log('On Focus');
@@ -139,21 +129,49 @@ export class BlogCreateionComponent implements OnInit {
   onBlur = () => {
     console.log('Blurred');
   };
-  onBlogSubmit() {
-    const object = {
+  // onBlogSubmit() {
+  //   const object = {
+  //     title: this.titleText,
+  //     type: this.SelectedValue,
+  //     description: this.editorText,
+  //     creator: this.authService.getUserId(),
+  //     images:this.uploadedImageURLs
+  //   };
+  //   this.sharedService.blogCreateApi(object).subscribe((res: any) => {
+  //     this.router.navigate(['/blog']);
+  //   });
+  // }
+  // SelectedValue: any = '';
+  get blogFields() {
+    return {
       title: this.titleText,
       type: this.SelectedValue,
       description: this.editorText,
       creator: this.authService.getUserId(),
-      images:this.uploadedImageURLs
+      images: this.uploadedImageURLs,
     };
-    this.sharedService.blogCreateApi(object).subscribe((res: any) => {
-      this.router.navigate(['/blog']);
-    });
   }
-  SelectedValue: any;
+
+  @Input() options: string[] = [
+    'Technical',
+    'Travel',
+    'Food',
+    'Fashion',
+    'Nature',
+  ];
+  @Input() SelectedValue: string = '';
+  @Output() valueChange = new EventEmitter<string>();
+  selectOption(option: string) {
+    this.SelectedValue = option;
+    this.valueChange.emit(this.SelectedValue);
+    this.isOpen = false;
+  }
+  isOpen = false;
+
+  toggleDropdown() {
+    this.isOpen = !this.isOpen;
+  }
+
   fileImage: any;
   onSelectValue(e: any) {}
-
-  
 }

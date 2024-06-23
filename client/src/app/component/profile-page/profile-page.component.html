@@ -1,8 +1,91 @@
-<p>profile-page works!</p>
+<app-header-blog></app-header-blog>
+
+<div class="flex justify-center items-center">
+    <div class="w-full max-w-[1200px] space-y-8">
+        <div class=" grid px-4 md:flex gap-10 mt-32">
+            <div class="bg-[#fff]  md:w-[30%] shadow-lg rounded-[5px] p-6">
+                <div *ngFor="let item of profileDetails">
+
+                    <img *ngIf="displayPicture" [src]="displayPicture" class="w-[200px] h-[200px] rounded-[50%]" />
+                <svg *ngIf="!displayPicture" class="w-[200px] h-[200px] fill-[#ff6481] m-auto cursor-pointer hover:fill-[#282424]">
+                    <use href="../../../assets/images/account-circle.svg#account"></use>
+                </svg>
+
+                <div class="broder-t-[#ddd] border mt-2 mb-2">             </div>
+                   <div class="p-2">
+                    <p class="text-xl mb-2">{{item.name | titlecase }}</p>
+                    <button class="text-[#ff6481] cursor-pointer" data-hs-overlay="#hs-vertically-centered-scrollable-modal"  data-bs-toggle="modal" data-bs-target="#dataModal">Edit profile</button>
+                   </div>
+                </div>
+                
+            </div>
+
+            <div class="md:w-[80%] space-y-5">
+                <div *ngFor="let item of profileDetails">
+                    <div class="bg-[#fff] w-full shadow-lg rounded-[5px] p-2 mb-5"
+                        *ngFor="let blogDetails of item.blogsData">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <img *ngIf="blogDetails.images[0]" class="h-[200px] w-full object-cover rounded-[5px]" [src]="blogDetails.images[0]" />
+                            <img *ngIf="!blogDetails.images[0]" class=" h-[200px] w-full rounded-[10px] " src="../../../assets/images/vichar.png"
+                                alt="image" />
+                            <div class="p-2">
+                                <button
+                                    class="bg-[#edf2f7] mb-4 font-bold text-[#7993a8] px-2 py-1 rounded-[5px]">{{blogDetails.type}}</button>
+                                <h3 class="mb-4 font-bold">{{blogDetails.title | titlecase}}</h3>
+                                <p class="textEllipse mb-4">{{blogDetails.subtitle}}</p>
+                                <div class="flex text-[#747474]">
+                                    <p>{{item.name |titlecase}}</p>
+                                    <svg class="w-[30px] h-[30px] fill-[#ff6481] cursor-pointer hover:fill-[#282424]">
+                                        <use href="../../../assets/images/circle-small.svg#circleSmall"></use>
+                                    </svg>
+                                    <p>{{blogDetails.timeStamp | date:"MMMM dd YYYY"}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
 
 
-<div class="mt-10">
-    <div *ngFor="let item of profileDetails">
-        <p>{{item.name}}</p>
+
+
+<div class="modal fade" id="dataModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="relative">
+                     <img *ngIf="displayPicture" [src]="displayPicture"
+                        class="w-[80px] h-[80px] object-cover m-auto cursor-pointer rounded-full hover:opacity-80">
+                    <svg *ngIf="!displayPicture" class="w-[80px] h-[80px] fill-[#ff6481] m-auto cursor-pointer hover:fill-[#282424]">
+                        <use href="../../../assets/images/account-circle.svg#account"></use>
+                    </svg>
+                <input type="file" id="fileInput" (change)="onFileSelected($event)"  class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer">
+           
+
+                </div>
+                <div>
+                    <p>Name</p>
+                    <input type="text" class="focus:outline-none border-[1px] p-2 rounded-[5px] border-[#ddd]" />
+<p>About</p>
+<textarea type="text" class="focus:outline-none border-[1px] p-2 rounded-[5px] border-[#ddd] resize-none" ></textarea>
+
+                </div>
+
+
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
     </div>
 </div>

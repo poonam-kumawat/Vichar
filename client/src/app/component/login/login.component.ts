@@ -5,6 +5,7 @@ import { SharedService } from '../../service/shared.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
+// import { ToastrModule, ToastrService } from 'ngx-toastr';
 declare const google: any;
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
     private sharedService: SharedService,
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: object,
-    private authService:AuthService
+    private authService: AuthService,
+    
   ) {}
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -55,11 +57,12 @@ export class LoginComponent implements OnInit {
     console.log(this.loginForm.value);
     this.sharedService.loginApi(this.loginForm.value).subscribe({
       next: (res) => {
-        console.log(res)
+        console.log(res);
         this.authService.saveUserId(res.data._id);
         this.router.navigate(['blog']);
       },
       error: (err) => {
+         
         console.log(err);
       },
     });

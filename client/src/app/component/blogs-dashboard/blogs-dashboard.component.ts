@@ -44,6 +44,7 @@ export class BlogsDashboardComponent implements OnInit {
       this.router.navigate([`/login`]);
     }
   }
+
   onNewBlog() {
     if (this.authService.isLoggedIn()) {
       this.router.navigate([`/create-blog`]);

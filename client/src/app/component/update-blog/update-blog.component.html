@@ -2,17 +2,17 @@
 
 <div class="updateWrap">
     <div class="max-w-[1336px] m-auto">
-        <div class="flex justify-center items-center mx-60 mt-32">
-            <div>
+        <div class=" relative  flex justify-center items-center mx-4 md:mx-60 mt-32 mb-6">
+            <div class="min-w-[80%]">
                 <div class="flex justify-between mb-10" *ngIf="!isupdate">
-                    <p class="text-xl cursor-pointer flex items-center text-[#282424]" (click)="onGoBack()"><svg class="w-[30px] h-[30px] fill-[#ff6481] mr-1  cursor-pointer hover:fill-[#282424]" (click)="onDelete()">
+                    <p class="text-xl cursor-pointer flex items-center text-[#282424]" (click)="onGoBack()"><svg class="w-[30px] h-[30px] fill-[#ff6481] mr-1  cursor-pointer hover:fill-[#282424]">
                         <use href="../../../assets/images/arrow-left.svg#arrow"></use>
                     </svg>Go Back</p>
                     <div class="flex gap-2">
-                        <svg class="w-[30px] h-[30px] fill-[#ff6481]  cursor-pointer hover:fill-[#282424]" (click)="onEdit()">
+                        <svg *ngIf="authService.getUserId()===creator" class="w-[30px] h-[30px] fill-[#ff6481]  cursor-pointer hover:fill-[#282424]" (click)="onEdit()">
                             <use href="../../../assets/images/file-document-edit-outline.svg#fileEdit"></use>
                         </svg>
-                        <svg class="w-[30px] h-[30px] fill-[#ff6481]  cursor-pointer hover:fill-[#282424]" (click)="onDelete()">
+                        <svg *ngIf="authService.getUserId()===creator" class="w-[30px] h-[30px] fill-[#ff6481]  cursor-pointer hover:fill-[#282424]" (click)="onDelete()">
                             <use href="../../../assets/images/trash-can.svg#trash"></use>
                         </svg>
                     </div>                    
@@ -20,24 +20,24 @@
                 </div>
                 <div class="mb-40" *ngIf="!isupdate">
                     <div *ngFor="let detail of detailBlog">
-                        <p class="text-2xl text-[#828282] mb-6">{{detail.type | uppercase }}</p>
-                        <p class="text-5xl font-bold mb-6">{{detail.title}}</p>
+                        <p class="text-xl md:text-2xl text-[#828282] mb-6">{{detail.type | uppercase }}</p>
+                        <p class="text-4xl md:text-5xl font-bold mb-6">{{detail.title}}</p>
                         <!-- <img class="object-cover  rounded-[10px] " src="../../../assets/images/Group 4.png" alt="image" /> -->
 
                         <div class="mt-6" [innerHtml]="detail.description"></div>
                     </div>
                 </div>
-                <div *ngIf="isupdate">
+                <div class=" " *ngIf="isupdate">
                     <form (ngSubmit)="onUpdate()">
                         <div class="grid gap-4">
-                        <input class="text-4xl focus:outline-none" type="text" [(ngModel)]="tilteData" name="title" />
-                        <quill-editor class="content-edito mb-10" [placeholder]="''" [modules]="quillConfiguration" [(ngModel)]="htmlText"
+                        <input class="text-3xl md:text-4xl focus:outline-none" type="text" [(ngModel)]="tilteData" name="title" />
+                        <quill-editor class="min-h-[480px] content-edito mb-10" [placeholder]="''" [modules]="quillConfiguration" [(ngModel)]="htmlText"
                             name="content" (onSelectionChanged)="onSelectionChanged($event)"
                             (onContentChanged)="onContentChanged($event)">
                         </quill-editor>
-                        <div class="flex justify-between gap-4 ">
+                        <div class="flex justify-between gap-4 md:absolute fixed p-4 md:border-none border boder-b-[1px] border-[#747474] bottom-0 right-0  left-0">
                         <button (click)="cancelEdit()" class="bg-[#ff6481] hover:bg-[#282424] w-full text-white font-bold py-2 px-4 rounded">Cancel</button>
-                        <button class="bg-[#ff6481] hover:bg-[#282424] w-full text-white font-bold py-2 px-4 rounded" type="submit">Publish</button>
+                        <button class="bg-[#ff6481] hover:bg-[#282424] w-full text-white font-bold py-2 px-4 rounded" type="submit">Update</button>
                         </div>
                 </div>
                     </form>
