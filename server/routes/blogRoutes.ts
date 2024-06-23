@@ -6,6 +6,8 @@ import multer from "multer";
 import path from "path";
 import { v4 as uuidv4 } from "uuid";
 import ImageKit from "imagekit";
+import dotenv from "dotenv";
+dotenv.config();
 
 
 const blogRouter=express.Router();
@@ -30,9 +32,10 @@ return res.status(200).json(blogCreation);
 const storage = multer.memoryStorage();
 const upload = multer({storage});
 const imagekit = new ImageKit({
-  publicKey: "public_c9LXwuMN+0zHnqJvDIwkSpASO0U=",
-  privateKey: "private_N9/+vdDzpkAof5MhcFDi6/8scMU=",
-  urlEndpoint: "https://ik.imagekit.io/poonam05/",
+  
+  publicKey: process.env.IMAGEKITPUBLICKEY!,
+  privateKey: process.env.IMAGEKITPRIVATEKEY!,
+  urlEndpoint: process.env.IMAGEKITURLPOINT!,
 });
 blogRouter.route("/upload").post(upload.single('file'),async (req: Request, res: Response) => {
   try {
@@ -55,10 +58,6 @@ const uploadResponse = await imagekit.upload({
   }
 });
 
-// blogRouter.route("/blogs").get(async(req:Request,res:Response)=>{
-//     const result = await blogSchema.find({}).sort({ timeStamp: -1 });
-//     return res.status(200).json(result);
-// })
 blogRouter.route("/blogs").get(async (req: Request, res: Response) => {
   try {
     const blogs = await blog.aggregate([

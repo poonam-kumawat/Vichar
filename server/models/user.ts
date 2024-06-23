@@ -5,6 +5,7 @@ interface user {
   name: string;
   password: string;
   timeStamp: Date;
+  profilePicture:string;
   blogs:[ObjectId]
 }
 
@@ -14,7 +15,8 @@ const userSchema = new Schema<user>(
     name: { type: String, required: true },
     password: { type: String },
     timeStamp: { type: Date, default: Date.now },
-    blogs:{type:[mongoose.Types.ObjectId], ref:"Blog"}
+    profilePicture: { type: String },
+    blogs: { type: [mongoose.Types.ObjectId], ref: "Blog" },
   },
   { versionKey: false }
 );
