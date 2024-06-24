@@ -2,7 +2,6 @@ import express, { Request, Response, Router, response } from "express";
 import * as bcrypt from "bcrypt";
 import user from "../models/user";
 import * as jwt from "jsonwebtoken";
-import { CreateError } from "../utils/error";
 import { CreateSuccess } from "../utils/success";
 import { OAuth2Client } from "google-auth-library";
 import mongoose from "mongoose";
@@ -28,7 +27,6 @@ userRouter
         password: hashPassword,
       });
       await createuser.save();
-      // return res.status(200).send("user Register");
       return next(CreateSuccess(200, "User Register successfully"));
     } catch (e: any) {
       res.status(500).json({
