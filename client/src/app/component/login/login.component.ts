@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
         console.log(res);
         this.authService.saveUserId(res.data._id);
         this.toastr.success('Login Successfull!', 'Hello From Vichar!', { timeOut: 2000 });
-        this.router.navigate(['blog']);
+        this.router.navigate(['/']);
       },
       error: (err) => {
         console.log(err);
