@@ -165,11 +165,11 @@ export class UpdateBlogComponent implements OnInit {
   }
   onDelete() {
     this.sharedService.deleteBlogApi(this.idDelete).subscribe((res: any) => {
-      this.router.navigate(['/blog']);
+      this.router.navigate(['/']);
     });
   }
   onGoBack() {
-    this.router.navigate(['/blog']);
+    this.router.navigate(['/']);
   }
   cancelEdit() {
     this.isupdate = false;

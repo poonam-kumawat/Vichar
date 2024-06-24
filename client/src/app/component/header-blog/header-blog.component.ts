@@ -25,7 +25,7 @@ export class HeaderBlogComponent implements OnInit {
   }
   onPublish() {
     this.sharedService.blogCreateApi(this.publishData).subscribe((res: any) => {
-      this.router.navigate(['/blog']);
+      this.router.navigate(['/']);
     });
   }
   onProfileView() {
