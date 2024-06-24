@@ -1,10 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { confirmPasswordValidator } from '../../Validators/customValidator';
 import { SharedService } from '../../service/shared.service';
 import { Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +22,11 @@ import { HttpClientModule } from '@angular/common/http';
 export class RegisterComponent implements OnInit {
   fb = inject(FormBuilder);
   route = inject(Router);
-  constructor(private sharedService: SharedService,private router:Router) {}
+  constructor(
+    private sharedService: SharedService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
   registeration!: FormGroup;
   ngOnInit(): void {
     this.registeration = this.fb.group(
@@ -36,17 +46,37 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+      if (this.registeration.invalid) {
+        this.registeration.markAllAsTouched();
+        return;
+      }
     this.sharedService.registerApi(this.registeration.value).subscribe({
       next: (res) => {
-       
+        console.log(res)
+        this.toastr.success(
+          res.success.message || 'Registered Successfully',
+          'SUCCESS',
+          {
+            timeOut: 2000,
+          }
+        );
         this.route.navigate(['login']);
       },
       error: (err) => {
+        
+        this.toastr.error(
+          err.error.message._message || 'User validation failed',
+          'ERROR',
+          {
+            timeOut: 2000,
+          }
+        );
+
         console.log(err);
       },
     });
   }
-  onLogin(){
-     this.router.navigate(['login']);
+  onLogin() {
+    this.router.navigate(['login']);
   }
 }

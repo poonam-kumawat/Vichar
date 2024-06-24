@@ -18,8 +18,7 @@ export class BlogsDashboardComponent implements OnInit {
     private renderer: Renderer2,
     private sharedService: SharedService,
     private router: Router,
-    public authService: AuthService,
- 
+    public authService: AuthService
   ) {}
   ngOnInit(): void {
     this.ongetBlogs();
@@ -34,6 +33,7 @@ export class BlogsDashboardComponent implements OnInit {
     });
   }
   OnNavigate(id: any) {
+    this.authService.setBlogCreation(false);
     this.router.navigate([`/update`, id]);
   }
   onProfileView() {
@@ -45,8 +45,12 @@ export class BlogsDashboardComponent implements OnInit {
     }
   }
 
+  // isBlogCreation=false;
+
   onNewBlog() {
     if (this.authService.isLoggedIn()) {
+      this.authService.setBlogCreation(true);
+
       this.router.navigate([`/create-blog`]);
     } else {
       this.router.navigate([`/login`]);
@@ -62,7 +66,8 @@ export class BlogsDashboardComponent implements OnInit {
     }
   }
   onLogin() {
-    this.router.navigate(['login']);
+    console.log(this.authService.isLoggedIn());
+    if (!this.authService.isLoggedIn()) this.router.navigate(['login']);
   }
 
   logout(): void {
@@ -72,6 +77,8 @@ export class BlogsDashboardComponent implements OnInit {
   onSignUp() {
     this.router.navigate(['register']);
   }
- 
- 
+
+  onBlogPage(){
+    this.router.navigate(['/'])
+  }
 }

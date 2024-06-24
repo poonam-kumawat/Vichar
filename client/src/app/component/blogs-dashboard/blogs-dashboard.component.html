@@ -13,7 +13,7 @@
             <div class="max-w-[1830px] m-auto">
             <div id="header" class="px-8 py-4 shadow-md bg-[#ffffff] md:mx-28 absolute top-8 right-2 left-2 md:right-16 md:left-16 rounded-[50px]">
                 <div class="flex justify-between items-center">
-                    <img src="../../../assets/images/vichar.png" class="h-[30px]">
+                    <img (click)="onBlogPage()" src="../../../assets/images/vichar.png" class="h-[30px] cursor-pointer">
                     <div class="flex justify-center gap-4 items-center">
                         <p *ngIf="!authService.isLoggedIn()" class="text-[#ff6481] hover:text-[#282424] text-2xl font-bold  cursor-pointer hover:scale-105 hover:ease-in hover:duration-300" (click)="onLogin()">Login</p>
                                                 <p *ngIf="authService.isLoggedIn()" class="text-[#ff6481] hover:text-[#282424] text-2xl font-bold  cursor-pointer hover:scale-105 hover:ease-in hover:duration-300"
@@ -46,19 +46,19 @@
 
         </div>
         <div class="max-w-[1330px] m-auto ">
-            <div class="grid md:grid-cols-3 gap-8 px-4 md:px-0">
+            <div class="grid md:grid-cols-3 gap-8 px-4 md:mt-11 md:px-0">
                 <ng-container *ngFor="let blog of blogsData;let i=index">
                     <div class="hover:scale-105 hover:ease-in hover:duration-300  cursor-pointer grid gap-4 border-2 border-[#feeae] rounded-[10px] p-2 mt-8" (click)="OnNavigate(blog._id)">
                         <div class="cursor-pointer">
                             <img *ngIf="blog.images[0]" class="object-cover h-[200px] w-full rounded-[10px] " [src]="blog.images[0]" alt="image" />
-                        <img *ngIf="!blog.images[0]" class=" h-[200px] w-full rounded-[10px] " src="../../../assets/images/vichar.png" alt="image" />
+                        <img *ngIf="!blog.images[0]" class=" h-[200px] w-full rounded-[10px] " src="../../../assets/images/vicharpage.png" alt="image" />
                         
                     </div>
                         <div class="p-2 md:w-96">
                           <button class="bg-[#edf2f7] mb-4 font-bold text-[#7993a8] px-2 py-1 rounded-[5px]">{{blog.type}}</button>
                             <p class="cursor-pointer text-2xl font-bold mb-2 text-[#282424]">{{blog.title}}</p>                            
                             <div class="max-h-[70px] textEllipse  mb-4 text-ellipsis overflow-hidden">{{blog.subtitle}}</div>
-                            <div class="flex text-[#747474">
+                            <div class="flex text-[#747474]">
                             <p>{{blog.userDetails.name | titlecase}}</p>
                             <svg class="w-[30px] h-[30px] fill-[#ff6481] cursor-pointer hover:fill-[#282424]">
                                 <use href="../../../assets/images/circle-small.svg#circleSmall"></use>
@@ -75,8 +75,8 @@
         </div>
         <div class="bg-[#fff4f5] mt-20">
             <div class="md:flex justify-between text-center  md:px-28 py-14">
-                <h5>Blog Techs</h5>
-                <p>© 2024 by Blog-Tech. All rights reserved.</p>
+                <img (click)="onBlogPage()" src="../../../assets/images/vichar.png" class="h-[30px] cursor-pointer">
+                <p>© 2024 by Vichar. All rights reserved.</p>
 
             </div>
 

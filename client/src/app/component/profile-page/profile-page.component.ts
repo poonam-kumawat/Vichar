@@ -13,8 +13,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.css',
 })
-export class ProfilePageComponent implements OnInit {
-  http = inject(HttpClient);
+export class ProfilePageComponent implements OnInit {  
   constructor(
     private sharedService: SharedService,
     private route: ActivatedRoute,
@@ -47,11 +46,8 @@ export class ProfilePageComponent implements OnInit {
     console.log(event.target.files[0].name);
     const file = event.target.files[0];
     const uploadImage = new FormData();
-    console.log('>>>', uploadImage);
     uploadImage.append('file', file, file.name);
-    this.http
-      .post('http://localhost:5000/api/user/upload/profile', uploadImage)
-      .subscribe((response: any) => {
+    this.sharedService.profileUploadApi(uploadImage).subscribe((response: any) => {
         if (response && response.url) {
           this.displayPicture = response.url;
           console.log(response.url);

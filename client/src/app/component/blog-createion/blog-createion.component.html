@@ -1,7 +1,7 @@
 <app-header-blog [publishData]="blogFields"></app-header-blog>
 
 <div class="blogCreation">
-  <div class="md:max-w-[1330px] m-auto mt-24 p-2 md:p-8">
+  <div class="md:max-w-[1330px] mx-auto mt-24 p-2 md:p-8">
     <div class="grid md:mx-40 gap-4">
       <div class="relative inline-block md:w-80">
         <div class="border-2 border-[#ddd] rounded-[5px] p-2 cursor-pointer" (click)="toggleDropdown()">
@@ -19,15 +19,10 @@
           </li>
         </ul>
       </div>
-    <textarea appAutoResize maxlength="150" rows="1"  class="text-4xl overflow-y-hidden mt-4 focus:outline-none resize-none" type="text" placeholder="Title..." [(ngModel)]="titleText"></textarea>
+    <textarea appAutoResize maxlength="150" rows="1"  class="text-4xl pb-1 overflow-y-hidden mt-4 focus:outline-none resize-none" type="text" placeholder="Title..." [(ngModel)]="titleText"></textarea>
      <quill-editor class="content-editor mb-12" [placeholder]="''" [modules]="quillConfiguration" [(ngModel)]="htmlText"  
     (onSelectionChanged)="onSelectionChanged($event)" (onContentChanged)="onContentChanged($event)">
   </quill-editor>
-
-  
-
-  <!-- <button  class="bg-[#ff6481] hover:bg-[#282424] text-white font-bold py-2 px-4 rounded" type="button" (click)="onBlogSubmit()">Create</button> -->
-
   </div>
   </div>
 </div>

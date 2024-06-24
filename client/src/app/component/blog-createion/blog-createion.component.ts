@@ -3,8 +3,6 @@ import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { QuillModule } from 'ngx-quill';
-// import 'quill/dist/quill.core.css';
-// import 'quill/dist/quill.snow.css';
 import { SharedService } from '../../service/shared.service';
 import { Router } from '@angular/router';
 import { HeaderBlogComponent } from '../header-blog/header-blog.component';
@@ -54,16 +52,10 @@ export class BlogCreateionComponent implements OnInit {
               file.type === 'image/png' ||
               file.type === 'image/jpg'
             ) {
-              // File types supported for image
-              if (file.size < 100000000) {
+             if (file.size < 100000000) {
                 const uploadData = new FormData();
-                console.log('>>>', uploadData);
                 uploadData.append('file', file, file.name);
-                // uploadData.append('file', file.name);
-                console.log('>>>', uploadData);
-
-                return this.http
-                  .post('http://localhost:5000/api/blog/upload', uploadData)
+                return this.sharedService.blogUploadApi(uploadData)                               
                   .toPromise()
                   .then((result: any) => {
                     console.log(result);
@@ -88,7 +80,6 @@ export class BlogCreateionComponent implements OnInit {
         fetch: (url: string, callback: Function) => {
           this.http.get(url).subscribe(
             (res: any) => {
-              console.log('<<<<<', res.url);
               callback(res.url);
             },
             (error: any) => {
@@ -129,20 +120,7 @@ export class BlogCreateionComponent implements OnInit {
   onBlur = () => {
     console.log('Blurred');
   };
-  // onBlogSubmit() {
-  //   const object = {
-  //     title: this.titleText,
-  //     type: this.SelectedValue,
-  //     description: this.editorText,
-  //     creator: this.authService.getUserId(),
-  //     images:this.uploadedImageURLs
-  //   };
-  //   this.sharedService.blogCreateApi(object).subscribe((res: any) => {
-  //     this.router.navigate(['/blog']);
-  //   });
-  // }
-  // SelectedValue: any = '';
-  get blogFields() {
+   get blogFields() {
     return {
       title: this.titleText,
       type: this.SelectedValue,

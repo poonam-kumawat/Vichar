@@ -5,12 +5,16 @@ import { SharedService } from '../../service/shared.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
-// import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 declare const google: any;
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, HttpClientModule],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule,
+    HttpClientModule,    
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -22,7 +26,7 @@ export class LoginComponent implements OnInit {
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: object,
     private authService: AuthService,
-    
+    private toastr: ToastrService
   ) {}
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -59,11 +63,12 @@ export class LoginComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.authService.saveUserId(res.data._id);
+        this.toastr.success('Login Successfull!', 'Hello From Vichar!', { timeOut: 2000 });
         this.router.navigate(['blog']);
       },
       error: (err) => {
-         
         console.log(err);
+        this.toastr.error('fill the value', 'ERROR', { timeOut: 2000 });
       },
     });
   }

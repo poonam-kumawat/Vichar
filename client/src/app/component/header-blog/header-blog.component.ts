@@ -1,18 +1,28 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SharedService } from '../../service/shared.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header-blog',
   standalone: true,
-  imports: [],
-templateUrl: './header-blog.component.html',
+  imports: [CommonModule],
+  templateUrl: './header-blog.component.html',
   styleUrl: './header-blog.component.css',
 })
-export class HeaderBlogComponent {
-  constructor(private authService:AuthService,private sharedService: SharedService, private router: Router) {}
+export class HeaderBlogComponent implements OnInit {
+  constructor(
+    private authService: AuthService,
+    private sharedService: SharedService,
+    private router: Router
+  ) {}
   @Input() publishData: any;
+
+  isBlogCreation: any;
+  ngOnInit(): void {
+    this.isBlogCreation = this.authService.getBlogCreation();
+  }
   onPublish() {
     this.sharedService.blogCreateApi(this.publishData).subscribe((res: any) => {
       this.router.navigate(['/blog']);
@@ -25,5 +35,8 @@ export class HeaderBlogComponent {
     } else {
       this.router.navigate([`/login`]);
     }
+  }
+  onBlogPage() {
+    this.router.navigate(['/']);
   }
 }

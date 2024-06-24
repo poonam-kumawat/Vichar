@@ -1,9 +1,10 @@
 <div class="px-4 py-4 border-b-2 fixed top-0 right-0 left-0 z-10 bg-[#fff]">
     <div class="flex justify-between items-center">
-        <img src="../../../assets/images/vichar.png" class="h-[30px]">
+        <img (click)="onBlogPage()" src="../../../assets/images/vichar.png" class="h-[30px] cursor-pointer">
         
         <div class="flex gap-2 items-center" >
-          <button class="bg-[#ff6481] hover:bg-[#282424] text-white font-bold py-1 px-4 rounded-[20px]" (click)="onPublish()">Publish</button>
+       
+          <button *ngIf="isBlogCreation" class="bg-[#ff6481] hover:bg-[#282424] text-white font-bold py-1 px-4 rounded-[20px]" (click)="onPublish()">Publish</button>
   <svg class="w-[40px] h-[40px] fill-[#ff6481]  cursor-pointer hover:fill-[#282424]" (click)="onProfileView()">
     <use href="../../../assets/images/account-circle.svg#account"></use>
   </svg>

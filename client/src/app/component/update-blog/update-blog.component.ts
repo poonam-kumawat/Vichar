@@ -11,6 +11,7 @@ import Quill from 'quill';
 import { ImageHandler, Options } from 'ngx-quill-upload';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../service/auth.service';
+import { AutoResizeDirective } from '../../directives/auto-resize.directive';
 Quill.register('modules/imageHandler', ImageHandler);
 
 @Component({
@@ -22,6 +23,7 @@ Quill.register('modules/imageHandler', ImageHandler);
     ReactiveFormsModule,
     QuillModule,
     HeaderBlogComponent,
+    AutoResizeDirective,
   ],
   templateUrl: './update-blog.component.html',
   styleUrl: './update-blog.component.css',
@@ -31,7 +33,7 @@ export class UpdateBlogComponent implements OnInit {
     private sharedService: SharedService,
     private route: ActivatedRoute,
     private router: Router,
-    public authService:AuthService
+    public authService: AuthService
   ) {}
 
   http = inject(HttpClient);
@@ -116,7 +118,7 @@ export class UpdateBlogComponent implements OnInit {
   // ngOnInit(): void {
   //   this.onDetailDisplay();
   // }
-creator:any;
+  creator: any;
   onDetailDisplay() {
     const id = this.route.snapshot.paramMap.get('id');
     const body = {
@@ -130,15 +132,15 @@ creator:any;
         this.tilteData = blogDetail.title;
         this.htmlText = blogDetail.description;
         this.uploadedImageURLs = blogDetail.images;
-        this.creator=blogDetail.creator;
+        this.creator = blogDetail.creator;
       }
     });
   }
   editorText: any;
-  onContentChanged = (event: any) => {    
+  onContentChanged = (event: any) => {
     this.editorText = event.html;
   };
-  
+
   onFocus = () => {
     console.log('On Focus');
   };

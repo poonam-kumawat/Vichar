@@ -25,4 +25,11 @@ export class AuthService {
   logout(): void {    
     localStorage.removeItem('userId');
   }
+  isBlogCreation:boolean=false;
+  setBlogCreation(isCreation:boolean){
+    return this.isBlogCreation=isCreation;
+  }
+  getBlogCreation(){
+    return this.isBlogCreation;
+  }
 }

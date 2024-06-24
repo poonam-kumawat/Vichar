@@ -51,6 +51,18 @@ export class SharedService {
       filter
     );
   }
+  profileUploadApi(uploadImage: any) {
+    return this.http.post<any>(
+      `${ApiEndPont.REGISTER_POST_API}upload/profile`,
+      uploadImage
+    );
+  }
+  blogUploadApi(blogUpload: any) {
+    return this.http.post<any>(
+      `${ApiEndPont.REGISTER_POST_API}upload`,
+      blogUpload
+    );
+  }
 }
 
 
