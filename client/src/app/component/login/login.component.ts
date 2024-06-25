@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
   handleGoogleSignIn(response: any) {
     this.sharedService.googleLoginApi(response.credential).subscribe(
       (res) => {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/']);
       },
       (error) => {
         console.error('Google login error', error);
@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.authService.saveUserId(res.data._id);
-        this.toastr.success('Login Successfull!', 'Hello From Vichar!', { timeOut: 2000 });
+        this.toastr.success('Login Successfull!', 'Success!', { timeOut: 2000 });
         this.router.navigate(['/']);
       },
       error: (err) => {

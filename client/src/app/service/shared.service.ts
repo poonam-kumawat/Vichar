@@ -58,10 +58,7 @@ export class SharedService {
     );
   }
   blogUploadApi(blogUpload: any) {
-    return this.http.post<any>(
-      `${ApiEndPont.REGISTER_POST_API}upload`,
-      blogUpload
-    );
+    return this.http.post<any>(`${ApiEndPont.BOLG_API}upload`, blogUpload);
   }
 }
 

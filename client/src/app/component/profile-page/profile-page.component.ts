@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderBlogComponent } from '../header-blog/header-blog.component';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../service/auth.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -13,11 +14,12 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.css',
 })
-export class ProfilePageComponent implements OnInit {  
+export class ProfilePageComponent implements OnInit {
   constructor(
     private sharedService: SharedService,
     private route: ActivatedRoute,
-    private router:Router
+    private router: Router,
+    private authService:AuthService
   ) {}
 
   ngOnInit(): void {
@@ -42,12 +44,12 @@ export class ProfilePageComponent implements OnInit {
   displayPicture: any;
 
   onFileSelected(event: any) {
-    console.log(event);
-    console.log(event.target.files[0].name);
     const file = event.target.files[0];
     const uploadImage = new FormData();
     uploadImage.append('file', file, file.name);
-    this.sharedService.profileUploadApi(uploadImage).subscribe((response: any) => {
+    this.sharedService
+      .profileUploadApi(uploadImage)
+      .subscribe((response: any) => {
         if (response && response.url) {
           this.displayPicture = response.url;
           console.log(response.url);
@@ -68,5 +70,14 @@ export class ProfilePageComponent implements OnInit {
   }
   OnNavigate(id: any) {
     this.router.navigate([`/update`, id]);
+  }
+  onNewBlog() {
+    if (this.authService.isLoggedIn()) {
+      this.authService.setBlogCreation(true);
+
+      this.router.navigate([`/create-blog`]);
+    } else {
+      this.router.navigate([`/login`]);
+    }
   }
 }

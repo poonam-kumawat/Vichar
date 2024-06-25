@@ -42,3 +42,7 @@
     max-width: 100%;
     margin: auto;
 }
+
+::ng-deep .ql-editor{
+    margin-top: 15px;
+}

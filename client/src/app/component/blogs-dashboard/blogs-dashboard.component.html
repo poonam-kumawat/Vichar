@@ -46,8 +46,29 @@
 
         </div>
         <div class="max-w-[1330px] m-auto ">
+            <div *ngIf="blogsData.length===0" class="grid md:grid-cols-2 mt-12">
+                <div class="items-center justify-center flex">
+                    <div class="text-center md:text-left px-4">
+                    <p class="text-[#ff6481] text-4xl mb-3 font-bold">Welcome to Vichar</p>
+                    <p class="text-xl">Welcome to Vichar, a vibrant blog platform where ideas flourish and thoughts come to life. Dive into a diverse array of
+                    topics, insightful discussions, and inspiring stories that ignite your mind and spark your curiosity. Join us in
+                    exploring the world through the lens of Vichar, where every perspective matters.</p>
+                    <button class="bg-[#ff6481] hover:bg-[#282424] text-white font-bold py-2 px-4 mt-4 rounded" (click)="onNewBlog()">let's
+                        Vichar</button>
+                    </div>    
+
+                </div>
+                <div class="flex justify-center items-center">
+               <img  src="../../../assets/images/blog-post.svg" class="">
+               </div>
+               
+                
+            </div>
             <div class="grid md:grid-cols-3 gap-8 px-4 md:mt-11 md:px-0">
+           
                 <ng-container *ngFor="let blog of blogsData;let i=index">
+                  
+                
                     <div class="hover:scale-105 hover:ease-in hover:duration-300  cursor-pointer grid gap-4 border-2 border-[#feeae] rounded-[10px] p-2 mt-8" (click)="OnNavigate(blog._id)">
                         <div class="cursor-pointer">
                             <img *ngIf="blog.images[0]" class="object-cover h-[200px] w-full rounded-[10px] " [src]="blog.images[0]" alt="image" />
@@ -75,8 +96,8 @@
         </div>
         <div class="bg-[#fff4f5] mt-20">
             <div class="md:flex justify-between text-center  md:px-28 py-14">
-                <img (click)="onBlogPage()" src="../../../assets/images/vichar.png" class="h-[30px] cursor-pointer">
-                <p>© 2024 by Vichar. All rights reserved.</p>
+                <img (click)="onBlogPage()" src="../../../assets/images/vichar.png" class="h-[30px] cursor-pointer  md:mx-0 mx-32">
+                <p class="text-center md:mt-0 mt-3">© 2024 by Vichar. All rights reserved.</p>
 
             </div>
 

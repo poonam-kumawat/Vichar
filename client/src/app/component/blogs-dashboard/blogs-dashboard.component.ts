@@ -29,7 +29,6 @@ export class BlogsDashboardComponent implements OnInit {
   ongetBlogs() {
     this.sharedService.getBlogApi().subscribe((data) => {
       this.blogsData = data;
-      console.log(this.blogsData);
     });
   }
   OnNavigate(id: any) {

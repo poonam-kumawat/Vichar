@@ -6,28 +6,40 @@
             <div class="bg-[#fff]  md:w-[30%] shadow-md rounded-[5px] p-6">
                 <div *ngFor="let item of profileDetails">
 
-                 <img *ngIf="item.profilePicture" [src]="item.profilePicture" class="w-[200px] m-auto h-[200px] rounded-[50%] border-[1px] border-[#e9e9e9]" />
-                <svg *ngIf="!item.profilePicture" class="w-[200px] h-[200px] fill-[#ff6481] m-auto cursor-pointer hover:fill-[#282424]">
-                    <use href="../../../assets/images/account-circle.svg#account"></use>
-                </svg>
+                    <img *ngIf="item.profilePicture" [src]="item.profilePicture"
+                        class="w-[200px] m-auto h-[200px] rounded-[50%] border-[1px] border-[#e9e9e9]" />
+                    <svg *ngIf="!item.profilePicture"
+                        class="w-[200px] h-[200px] fill-[#ff6481] m-auto cursor-pointer hover:fill-[#282424]">
+                        <use href="../../../assets/images/account-circle.svg#account"></use>
+                    </svg>
 
-                <div class="broder-t-[#ddd] border mt-2 mb-2">             </div>
-                   <div class="p-2">
-                    <p class="text-xl mb-2">{{item.name | titlecase }}</p>
-                    <p *ngIf="item.about" class="text-sm mb-2 text-[#a5a3a3]">{{item.about }}</p>
-                    <button class="text-[#ff6481] cursor-pointer" data-hs-overlay="#hs-vertically-centered-scrollable-modal"  data-bs-toggle="modal" data-bs-target="#dataModal">Edit profile</button>
-                   </div>
-                </div>                
+                    <div class="broder-t-[#ddd] border mt-2 mb-2"> </div>
+                    <div class="p-2">
+                        <p class="text-xl mb-2">{{item.name | titlecase }}</p>
+                        <p *ngIf="item.about" class="text-sm mb-2 text-[#a5a3a3]">{{item.about }}</p>
+                        <button class="text-[#ff6481] cursor-pointer"
+                            data-hs-overlay="#hs-vertically-centered-scrollable-modal" data-bs-toggle="modal"
+                            data-bs-target="#dataModal">Edit profile</button>
+                    </div>
+                </div>
             </div>
 
-            <div class="md:w-[80%] space-y-5">
+            <div class="md:w-[80%] space-y-5">          
+
                 <div *ngFor="let item of profileDetails">
+                   
+                    <div *ngIf="item.blogsData.length===0" class="flex items-center justify-center md:mt-52 mt-32">
+                        <button class="bg-[#ff6481] hover:bg-[#282424] text-white font-bold py-2 px-4 rounded" (click)="onNewBlog()">Start
+                            blog</button>
+                    </div>
                     <div class="bg-[#fff] w-full shadow-md border border-[#e9e9e9] rounded-[5px] p-2 mb-5 hover:scale-105 hover:ease-in hover:duration-300"
                         *ngFor="let blogDetails of item.blogsData">
                         <div class="grid md:grid-cols-2 gap-8 cursor-pointer " (click)="OnNavigate(blogDetails._id)">
-                            <img *ngIf="blogDetails.images[0]" class="h-[200px] w-full m-auto object-cover rounded-[5px]" [src]="blogDetails.images[0]" />
-                            <img *ngIf="!blogDetails.images[0]" class=" h-[200px] w-full m-auto rounded-[10px] " src="../../../assets/images/vicharpage.png"
-                                alt="image" />
+                            <img *ngIf="blogDetails.images[0]"
+                                class="h-[200px] w-full m-auto object-cover rounded-[5px]"
+                                [src]="blogDetails.images[0]" />
+                            <img *ngIf="!blogDetails.images[0]" class=" h-[200px] w-full m-auto rounded-[10px] "
+                                src="../../../assets/images/vicharpage.png" alt="image" />
                             <div class="p-2">
                                 <button
                                     class="bg-[#edf2f7] mb-4 font-bold text-[#7993a8] px-2 py-1 rounded-[5px]">{{blogDetails.type}}</button>
@@ -62,30 +74,37 @@
             </div>
             <div class="modal-body">
                 <div class="relative">
-                     <img *ngIf="displayPicture" [src]="displayPicture"
+                    <img *ngIf="displayPicture" [src]="displayPicture"
                         class="w-[80px] h-[80px] object-cover m-auto cursor-pointer rounded-full hover:opacity-80">
-                    <svg *ngIf="!displayPicture" class="w-[100px] h-[100px] fill-[#ff6481] m-auto cursor-pointer hover:fill-[#282424]">
+                    <svg *ngIf="!displayPicture"
+                        class="w-[100px] h-[100px] fill-[#ff6481] m-auto cursor-pointer hover:fill-[#282424]">
                         <use href="../../../assets/images/account-circle.svg#account"></use>
                     </svg>
-                <input type="file" id="fileInput" (change)="onFileSelected($event)"  class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer">          
+                    <input type="file" id="fileInput" (change)="onFileSelected($event)"
+                        class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer">
 
                 </div>
                 <div class="grid gap-3">
                     <diV>
-                    <p class="mb-2">Name</p>
-                    <input type="text" class="focus:outline-none w-full border-[1px] p-2 rounded-[5px] border-[#ddd]" [(ngModel)]="profileName"  name="title"/>
+                        <p class="mb-2">Name</p>
+                        <input type="text"
+                            class="focus:outline-none w-full border-[1px] p-2 rounded-[5px] border-[#ddd]"
+                            [(ngModel)]="profileName" name="title" />
                     </diV>
                     <div>
-                    <p class="mb-2">About</p>
-                    <textarea type="text" class="focus:outline-none border-[1px] p-2 w-full rounded-[5px] border-[#ddd] resize-none" [(ngModel)]="aboutProfile" name="about"></textarea>
+                        <p class="mb-2">About</p>
+                        <textarea type="text"
+                            class="focus:outline-none border-[1px] p-2 w-full rounded-[5px] border-[#ddd] resize-none"
+                            [(ngModel)]="aboutProfile" name="about"></textarea>
                     </div>
                 </div>
 
 
-                
+
             </div>
-            <div class="modal-footer border-none">                
-                <button type="button" class="btn bg-[#ff6481] text-white hover:bg-[#282424] hover:text-white" (click)="onProfileUpdate()" data-bs-dismiss="modal">Update</button>
+            <div class="modal-footer border-none">
+                <button type="button" class="btn bg-[#ff6481] text-white hover:bg-[#282424] hover:text-white"
+                    (click)="onProfileUpdate()" data-bs-dismiss="modal">Update</button>
             </div>
         </div>
     </div>

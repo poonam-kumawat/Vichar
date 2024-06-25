@@ -22,6 +22,7 @@ export class HeaderBlogComponent implements OnInit {
   isBlogCreation: any;
   ngOnInit(): void {
     this.isBlogCreation = this.authService.getBlogCreation();
+    
   }
   onPublish() {
     this.sharedService.blogCreateApi(this.publishData).subscribe((res: any) => {
