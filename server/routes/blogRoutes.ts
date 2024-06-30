@@ -54,27 +54,59 @@ blogRouter
     }
   });
 
-blogRouter.route("/blogs").get(async (req: Request, res: Response) => {
-  try {
-    const blogs = await blog.aggregate([
-      {
-        $lookup: {
-          from: "users",
-          localField: "creator",
-          foreignField: "_id",
-          as: "userDetails",
-        },
-      },
-      {
-        $unwind: "$userDetails",
-      },
-    ]);
+  blogRouter.route("/blogs").post(async (req: Request, res: Response) => {
+    try {
+      const { page = 1, limit = 10 } = req.body;
+      const skip = (page - 1) * limit;
+      const totalCount = await blog.countDocuments();
 
-    res.status(200).json(blogs);
-  } catch (err: any) {
-    res.status(500).json({ message: err.message });
-  }
-});
+      const blogs = await blog.aggregate([
+        {
+          $lookup: {
+            from: "users",
+            localField: "creator",
+            foreignField: "_id",
+            as: "userDetails",
+          },
+        },
+        {
+          $unwind: "$userDetails",
+        },
+        {
+          $skip: skip,
+        },
+        {
+          $limit: limit,
+        },
+      ]);
+
+      res.status(200).json({blogs, totalCount});
+    } catch (err: any) {
+      res.status(500).json({ message: err.message });
+    }
+  });
+
+
+//   try {
+//     const blogs = await blog.aggregate([
+//       {
+//         $lookup: {
+//           from: "users",
+//           localField: "creator",
+//           foreignField: "_id",
+//           as: "userDetails",
+//         },
+//       },
+//       {
+//         $unwind: "$userDetails",
+//       },
+//     ]);
+
+//     res.status(200).json(blogs);
+//   } catch (err: any) {
+//     res.status(500).json({ message: err.message });
+//   }
+// });
 
 blogRouter.route("/:id").delete(async (req: Request, res: Response) => {
   try {
@@ -106,7 +138,11 @@ blogRouter.route("/edit").put(async (req: Request, res: Response) => {
 blogRouter.route("/details").post(async (req: Request, res: Response) => {
   try {
     const filter = req.body;
-    const data = await blogSchema.find(filter);
+    // const data = await blogSchema.find(filter);
+    const data = await blogSchema
+      .find(filter)
+      .populate("creator", "name profilePicture timeStamp");
+
     return res.status(200).send(data);
   } catch (error: any) {}
 });

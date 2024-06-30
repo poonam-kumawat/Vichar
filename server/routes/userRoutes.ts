@@ -200,5 +200,14 @@ userRouter.route("/edit/profile").put(async(req:Request,res:Response)=>{
    }
 })
 
+userRouter.route("/creators").get(async(req:Request,res:Response)=>{
+  try {
+    const data = await user.find();
+    res.status(200).json(data);    
+  } catch (error:any) {
+      return res.status(500).json({ error: error.message });
+  }
+})
+
 
 export default userRouter;

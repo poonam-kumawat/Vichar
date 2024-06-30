@@ -16,7 +16,7 @@ const blogSchema = new Schema<blog>(
     type: { type: String, required: true },
     description: { type: String },
     timeStamp: { type: Date, default: Date.now },
-    creator: { type: mongoose.Types.ObjectId, ref: "User", required: true },
+    creator: { type: mongoose.Types.ObjectId, ref: "user", required: true },
     images: [{ type: String }],
     subtitle: { type: String },
   },
