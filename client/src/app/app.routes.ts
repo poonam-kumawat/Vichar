@@ -7,6 +7,7 @@ import { UpdateBlogComponent } from './component/update-blog/update-blog.compone
 import { AuthGuard } from './service/authGaurd.service';
 import { NotFoundPageComponent } from './component/not-found-page/not-found-page.component';
 import { ProfilePageComponent } from './component/profile-page/profile-page.component';
+import { CreatorsComponent } from './component/creators/creators.component';
 
 export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
@@ -14,8 +15,10 @@ export const routes: Routes = [
   { path: 'profile/:id', component: ProfilePageComponent },
   {
     path: 'create-blog',
-    component: BlogCreateionComponent},
+    component: BlogCreateionComponent,
+  },
   { path: '', component: BlogsDashboardComponent },
   { path: 'update/:id', component: UpdateBlogComponent },
+  { path: 'creators', component: CreatorsComponent },
   { path: '**', component: NotFoundPageComponent },
 ];

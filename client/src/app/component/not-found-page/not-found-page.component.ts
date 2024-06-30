@@ -13,7 +13,7 @@ export class NotFoundPageComponent {
   constructor(private router:Router){}
 
   onPageNotFound(){
-    this.router.navigate(['blog']);
+    this.router.navigate(['/']);
   }
   
 }

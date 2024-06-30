@@ -1,102 +1,136 @@
 <div class="main">
-    <!-- <div class="px-4 py-4 shadow-md">
-    <div class="flex justify-between items-center">
-        <h5>Blogs</h5>
-        <button class="bg-[#ff6481] hover:bg-[#282424] text-white font-bold py-2 px-4 rounded" (click)="onNewBlog()">new
-            Blog</button>
-
-    </div>
-    </div> -->
-
     <div class="blogStart ">
-        <div class="h-screen  bg-[#fff4f5] relative">
+        <div class="h-screen  bg-[#faf8ff] relative">
             <div class="max-w-[1830px] m-auto">
-            <div id="header" class="px-8 py-4 shadow-md bg-[#ffffff] md:mx-28 absolute top-8 right-2 left-2 md:right-16 md:left-16 rounded-[50px]">
-                <div class="flex justify-between items-center">
-                    <img (click)="onBlogPage()" src="../../../assets/images/vichar.png" class="h-[30px] cursor-pointer">
-                    <div class="flex justify-center gap-4 items-center">
-                        <p *ngIf="!authService.isLoggedIn()" class="text-[#ff6481] hover:text-[#282424] text-2xl font-bold  cursor-pointer hover:scale-105 hover:ease-in hover:duration-300" (click)="onLogin()">Login</p>
-                                                <p *ngIf="authService.isLoggedIn()" class="text-[#ff6481] hover:text-[#282424] text-2xl font-bold  cursor-pointer hover:scale-105 hover:ease-in hover:duration-300"
-                                                    (click)="logout()">logout</p>
+                <div id="header"
+                    class="px-8 py-4 shadow-md bg-[#ffffff] md:mx-28 absolute top-8 right-2 left-2 md:right-16 md:left-16 rounded-[50px]">
+                    <div class="flex justify-between items-center">
+                        <img (click)="onBlogPage()" src="../../../assets/images/vichar.png"
+                            class="h-[30px] cursor-pointer">
+                        <div class="flex justify-center gap-4 items-center">
+                            <!-- <p class="text-[#6A4EE9] hover:text-[#282424] text-2xl font-bold  cursor-pointer hover:scale-105 hover:ease-in hover:duration-300" (click)="onCreators()">Creators</p> -->
+                            <p *ngIf="!authService.isLoggedIn()"
+                                class="text-[#6A4EE9] hover:text-[#282424] text-2xl font-bold  cursor-pointer hover:scale-105 hover:ease-in hover:duration-300"
+                                (click)="onLogin()">Login</p>
+                            <p *ngIf="authService.isLoggedIn()"
+                                class="text-[#6A4EE9] hover:text-[#282424] text-2xl font-bold  cursor-pointer hover:scale-105 hover:ease-in hover:duration-300"
+                                (click)="logout()">logout</p>
 
-                        <p class="text-[#ff6481] hover:text-[#282424] text-2xl font-bold  cursor-pointer hover:scale-105 hover:ease-in hover:duration-300" (click)="onSignUp()" *ngIf="!authService.isLoggedIn()">Sign Up</p>
-                    <svg class="w-[30px] h-[30px] fill-[#ff6481]  cursor-pointer hover:fill-[#282424]" (click)="onProfileView()">
-                        <use href="../../../assets/images/account-circle.svg#account"></use>
-                    </svg>
+                            <p class="text-[#6A4EE9] hover:text-[#282424] text-2xl font-bold  cursor-pointer hover:scale-105 hover:ease-in hover:duration-300"
+                                (click)="onSignUp()" *ngIf="!authService.isLoggedIn()">Sign Up</p>
+                                <svg class="w-[30px] h-[30px] fill-[#6A4EE9]  cursor-pointer hover:fill-[#282424]" (click)="onNewBlog()">
+                                    <use href="../../../assets/images/pencil-box-outline.svg#pencil"></use>
+                                </svg>
+                            <svg class="w-[30px] h-[30px] fill-[#6A4EE9]  cursor-pointer hover:fill-[#282424]"
+                                (click)="onProfileView()">
+                                <use href="../../../assets/images/account-circle.svg#account"></use>
+                            </svg>
+                        </div>
+
                     </div>
-                    <!-- <button class="bg-[#ff6481] hover:bg-[#282424] text-white font-bold py-2 px-4 rounded" (click)="onNewBlog()">new
-                        Blog</button> -->
-            
                 </div>
-            </div>
-            <div class="flex justify-center items-center">
-                <div class="grid gap-10 mt-64 text-center px-4 md:px-52">
-                  <h4 class="text-[#ff6481] text-4xl md:text-6xl">Start Sharing Your thoughts Today!</h4>
-                <p class="text-xl md:text-2xl text-[#828282]">Ignite your passion for writing and share your thoughts with the world through our intuitive blogging platform. Unleash
-                your creativity and join a community of fellow bloggers today.</p>
-                <div>
-                    <button class="bg-[#ff6481] hover:bg-[#282424] text-white font-bold py-2 px-4 rounded" (click)="onNewBlog()">Start blog</button>
+                <div class="flex justify-center items-center">
+                    <div class="grid gap-10 mt-64 text-center px-4 md:px-52">
+                        <h4 class="text-[#6A4EE9] text-4xl md:text-6xl">Start Sharing Your thoughts Today!</h4>
+                        <p class="text-xl md:text-2xl text-[#828282]">With Vichar, you have the power to influence and inspire. Share your stories, experiences, and thoughts on our
+                        easy-to-use platform. Become a part of our blogging community now!</p>
+                        <div>
+                            <button class="bg-[#6A4EE9] hover:bg-[#282424] text-white font-bold py-2 px-4 rounded"
+                                (click)="onNewBlog()">Start blog</button>
+                        </div>
+
+                    </div>
+
                 </div>
-                
             </div>
 
-            </div>
-            </div>
-            
 
         </div>
         <div class="max-w-[1330px] m-auto ">
             <div *ngIf="blogsData.length===0" class="grid md:grid-cols-2 mt-12">
                 <div class="items-center justify-center flex">
                     <div class="text-center md:text-left px-4">
-                    <p class="text-[#ff6481] text-4xl mb-3 font-bold">Welcome to Vichar</p>
-                    <p class="text-xl">Welcome to Vichar, a vibrant blog platform where ideas flourish and thoughts come to life. Dive into a diverse array of
-                    topics, insightful discussions, and inspiring stories that ignite your mind and spark your curiosity. Join us in
-                    exploring the world through the lens of Vichar, where every perspective matters.</p>
-                    <button class="bg-[#ff6481] hover:bg-[#282424] text-white font-bold py-2 px-4 mt-4 rounded" (click)="onNewBlog()">let's
-                        Vichar</button>
-                    </div>    
+                        <p class="text-[#6A4EE9] text-4xl mb-3 font-bold">Welcome to Vichar</p>
+                        <p class="text-xl">Welcome to Vichar, a vibrant blog platform where ideas flourish and thoughts
+                            come to life. Dive into a diverse array of
+                            topics, insightful discussions, and inspiring stories that ignite your mind and spark your
+                            curiosity. Join us in
+                            exploring the world through the lens of Vichar, where every perspective matters.</p>
+                        <button class="bg-[#6A4EE9] hover:bg-[#282424] text-white font-bold py-2 px-4 mt-4 rounded"
+                            (click)="onNewBlog()">let's
+                            Vichar</button>
+                    </div>
 
                 </div>
                 <div class="flex justify-center items-center">
-               <img  src="../../../assets/images/blog-post.svg" class="">
-               </div>
-               
-                
+                    <img src="../../../assets/images/blog-post1.svg" class="">
+                </div>
+
+
             </div>
             <div class="grid md:grid-cols-3 gap-8 px-4 md:mt-11 md:px-0">
-           
+
                 <ng-container *ngFor="let blog of blogsData;let i=index">
-                  
-                
-                    <div class="hover:scale-105 hover:ease-in hover:duration-300  cursor-pointer grid gap-4 border-2 border-[#feeae] rounded-[10px] p-2 mt-8" (click)="OnNavigate(blog._id)">
+
+
+                    <div class="hover:scale-105 hover:ease-in hover:duration-300  cursor-pointer grid gap-4 border border-[#feeae] rounded-[2px] p-2 mt-8"
+                        (click)="OnNavigate(blog._id)">
                         <div class="cursor-pointer">
-                            <img *ngIf="blog.images[0]" class="object-cover h-[200px] w-full rounded-[10px] " [src]="blog.images[0]" alt="image" />
-                        <img *ngIf="!blog.images[0]" class=" h-[200px] w-full rounded-[10px] " src="../../../assets/images/vicharpage.png" alt="image" />
-                        
-                    </div>
+                            <img *ngIf="blog.images[0]" class="object-cover h-[200px] w-full rounded-[2px] "
+                                [src]="blog.images[0]" alt="image" />
+                            <img *ngIf="!blog.images[0]" class=" h-[200px] w-full rounded-[2px] "
+                                src="../../../assets/images/vicharpage.png" alt="image" />
+
+                        </div>
                         <div class="p-2 md:w-96">
-                          <button class="bg-[#edf2f7] mb-4 font-bold text-[#7993a8] px-2 py-1 rounded-[5px]">{{blog.type}}</button>
-                            <p class="cursor-pointer text-2xl font-bold mb-2 text-[#282424]">{{blog.title}}</p>                            
-                            <div class="max-h-[70px] textEllipse  mb-4 text-ellipsis overflow-hidden">{{blog.subtitle}}</div>
-                            <div class="flex text-[#747474]">
-                            <p>{{blog.userDetails.name | titlecase}}</p>
-                            <svg class="w-[30px] h-[30px] fill-[#ff6481] cursor-pointer hover:fill-[#282424]">
-                                <use href="../../../assets/images/circle-small.svg#circleSmall"></use>
-                            </svg>
-                            <p>{{blog.timeStamp | date}}</p>                            
+                            <button
+                                class="bg-[#edf2f7] mb-4 font-bold text-[#7993a8] px-2 py-1 rounded-[5px]">{{blog.type}}</button>
+                            <p class="cursor-pointer text-2xl font-bold mb-2 text-[#282424]">{{blog.title}}</p>
+                            <div class="max-h-[70px] textEllipse  mb-4 text-ellipsis overflow-hidden">{{blog.subtitle}}
                             </div>
-                        </div>                     
-                        
+                            <div class="flex gap-2 text-[#747474] items-center">
+                                <img *ngIf="blog.userDetails.profilePicture" [src]="blog.userDetails.profilePicture"
+                                    class="w-[30px]  h-[30px] rounded-[50%] border-[1px] border-[#e9e9e9]" />
+                                <svg *ngIf="!blog.userDetails.profilePicture"
+                                    class="w-[30px] h-[30px] fill-[#7993a8]  cursor-pointer">
+                                    <use href="../../../assets/images/account-circle.svg#account"></use>
+                                </svg>
+                                <p>{{blog.userDetails.name | titlecase}}</p>
+                                <svg class="w-[30px] h-[30px] fill-[#6A4EE9] cursor-pointer hover:fill-[#282424]">
+                                    <use href="../../../assets/images/circle-small.svg#circleSmall"></use>
+                                </svg>
+                                <p>{{blog.timeStamp | date}}</p>
+                            </div>
+                        </div>
+
                     </div>
                 </ng-container>
             </div>
-           
+            <div *ngIf="blogsData.length>=9" class="pagination mt-8 flex justify-center items-center gap-4">
+                <button (click)="onPrevPage()" [disabled]="currentPage === 1"
+                    class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Previous</button>
+                <span>Page {{ currentPage }} of {{ totalPages }}</span>
+                <button (click)="onNextPage()" [disabled]="currentPage === totalPages"
+                    class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Next</button>
+            </div>
+
+
+        </div>
+        <div class="" *ngIf="blogsData.length!==0" >
+            <div class="flex justify-center items-center m-auto mt-32">
+                <div>
+                <h2 class="text-center md:text-5xl">Our Creators</h2>
+                <app-creators [isBlogdashboard]="isBlogdashboard" ></app-creators>
+                <p class="text-xl text-[#6A4EE9] cursor-pointer text-center hover:text-[#282424]" (click)="onCreators()">View More</p>
+                </div>
+                
+            </div>
             
         </div>
-        <div class="bg-[#fff4f5] mt-20">
+        <div class="bg-[#faf8ff] mt-20">
             <div class="md:flex justify-between text-center  md:px-28 py-14">
-                <img (click)="onBlogPage()" src="../../../assets/images/vichar.png" class="h-[30px] cursor-pointer  md:mx-0 mx-32">
+                <img (click)="onBlogPage()" src="../../../assets/images/vichar.png"
+                    class="h-[30px] cursor-pointer  md:mx-0 mx-32">
                 <p class="text-center md:mt-0 mt-3">© 2024 by Vichar. All rights reserved.</p>
 
             </div>
@@ -106,13 +140,3 @@
     </div>
 
 </div>
-
-
-
-
-
-
-
-
-
-

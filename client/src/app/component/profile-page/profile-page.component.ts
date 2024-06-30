@@ -19,7 +19,7 @@ export class ProfilePageComponent implements OnInit {
     private sharedService: SharedService,
     private route: ActivatedRoute,
     private router: Router,
-    private authService:AuthService
+    public authService:AuthService
   ) {}
 
   ngOnInit(): void {

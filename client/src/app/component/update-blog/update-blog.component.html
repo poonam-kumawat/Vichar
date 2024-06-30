@@ -6,17 +6,17 @@
             <div class="min-w-[100%] md:min-w-[80%]">
                 <div class="flex justify-between mb-10" *ngIf="!isupdate">
                     <p class="text-xl cursor-pointer flex items-center text-[#282424]" (click)="onGoBack()"><svg
-                            class="w-[30px] h-[30px] fill-[#ff6481] mr-1  cursor-pointer hover:fill-[#282424]">
+                            class="w-[30px] h-[30px] fill-[#6A4EE9] mr-1  cursor-pointer hover:fill-[#282424]">
                             <use href="../../../assets/images/arrow-left.svg#arrow"></use>
                         </svg>Go Back</p>
                     <div class="flex gap-2">
-                        <svg *ngIf="authService.getUserId()===creator"
-                            class="w-[30px] h-[30px] fill-[#ff6481]  cursor-pointer hover:fill-[#282424]"
+                        <svg *ngIf="authService.getUserId()===creator._id"
+                            class="w-[30px] h-[30px] fill-[#6A4EE9]  cursor-pointer hover:fill-[#282424]"
                             (click)="onEdit()">
                             <use href="../../../assets/images/file-document-edit-outline.svg#fileEdit"></use>
                         </svg>
-                        <svg *ngIf="authService.getUserId()===creator"
-                            class="w-[30px] h-[30px] fill-[#ff6481]  cursor-pointer hover:fill-[#282424]"
+                        <svg *ngIf="authService.getUserId()===creator._id"
+                            class="w-[30px] h-[30px] fill-[#6A4EE9]  cursor-pointer hover:fill-[#282424]"
                             (click)="onDelete()">
                             <use href="../../../assets/images/trash-can.svg#trash"></use>
                         </svg>
@@ -29,7 +29,22 @@
                         <p class="text-4xl md:text-5xl font-bold mb-6">{{detail.title}}</p>
                         <div class="mt-6" [innerHtml]="detail.description"></div>
                     </div>
+                    <div class="mt-5 border-t-2 border-[#ddd] ">
+                        <div class="flex items-center gap-2 mt-5">
+                            <img *ngIf="creator.profilePicture" [src]="creator.profilePicture"
+                                class="w-[30px]  h-[30px] rounded-[50%] border-[1px] border-[#e9e9e9]" />
+                            <svg *ngIf="!creator.profilePicture" class="w-[30px] h-[30px] fill-[#7993a8]  cursor-pointer">
+                                <use href="../../../assets/images/account-circle.svg#account"></use>
+                            </svg>
+                            <p>{{creator.name}}</p>
+                            <p>{{creator.timeStamp|date}}</p>
+                    
+                        </div>
+                    
+                    
+                    </div>
                 </div>
+                
                 <div class=" " *ngIf="isupdate">
                     <form (ngSubmit)="onUpdate()">
                         <div class="grid gap-4">
@@ -44,9 +59,9 @@
                             <div
                                 class="flex justify-between gap-4 md:absolute fixed p-4  border-[1px] md:border-none md:border-[0px] bg-white  border-[#747474] bottom-0 right-0  left-0">
                                 <button (click)="cancelEdit()"
-                                    class="bg-[#ff6481] hover:bg-[#282424] w-full text-white font-bold py-2 px-4 rounded">Cancel</button>
+                                    class="bg-[#6A4EE9] hover:bg-[#282424] w-full text-white font-bold py-2 px-4 rounded">Cancel</button>
                                 <button
-                                    class="bg-[#ff6481] hover:bg-[#282424] w-full text-white font-bold py-2 px-4 rounded"
+                                    class="bg-[#6A4EE9] hover:bg-[#282424] w-full text-white font-bold py-2 px-4 rounded"
                                     type="submit">Update</button>
                             </div>
                         </div>

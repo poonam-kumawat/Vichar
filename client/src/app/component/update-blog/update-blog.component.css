@@ -56,7 +56,7 @@
 
 ::ng-deep .ql-toolbar.ql-snow{
     position: sticky;
-    top: 90px;
+    top: 72px;
     padding: 10px;
     background: #e9e9e9;
     z-index: 5;
@@ -64,7 +64,7 @@
 }
 
 ::ng-deep.ql-snow.ql-toolbar button:hover, ::ng-deep.ql-snow .ql-toolbar button:hover, ::ng-deep.ql-snow.ql-toolbar button:focus, ::ng-deep.ql-snow .ql-toolbar button:focus, ::ng-deep.ql-snow.ql-toolbar button.ql-active, ::ng-deep.ql-snow .ql-toolbar button.ql-active, ::ng-deep.ql-snow.ql-toolbar .ql-picker-label:hover, ::ng-deep.ql-snow .ql-toolbar .ql-picker-label:hover, ::ng-deep.ql-snow.ql-toolbar .ql-picker-label.ql-active, ::ng-deep.ql-snow .ql-toolbar .ql-picker-label.ql-active, ::ng-deep.ql-snow.ql-toolbar .ql-picker-item:hover, ::ng-deep.ql-snow .ql-toolbar .ql-picker-item:hover, ::ng-deep.ql-snow.ql-toolbar .ql-picker-item.ql-selected, ::ng-deep.ql-snow .ql-toolbar .ql-picker-item.ql-selected {
-    color: #ff6481 !important;
+    color: #6A4EE9 !important;
 }
 ::ng-deep .ql-editor{
     height: auto !important;

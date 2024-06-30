@@ -30,8 +30,8 @@ export class SharedService {
   blogCreateApi(body: any) {
     return this.http.post<any>(`${ApiEndPont.BOLG_API}create`, body);
   }
-  getBlogApi() {
-    return this.http.get<any>(`${ApiEndPont.BOLG_API}blogs`);
+  getBlogApi(body: any) {
+    return this.http.post<any>(`${ApiEndPont.BOLG_API}blogs`, body);
   }
   deleteBlogApi(filter: any) {
     return this.http.delete<any>(`${ApiEndPont.BOLG_API}${filter}`);
@@ -59,6 +59,9 @@ export class SharedService {
   }
   blogUploadApi(blogUpload: any) {
     return this.http.post<any>(`${ApiEndPont.BOLG_API}upload`, blogUpload);
+  }
+  getCreatorsApi() {
+    return this.http.get<any>(`${ApiEndPont.REGISTER_POST_API}creators`);
   }
 }
 

@@ -3,9 +3,11 @@
         <img (click)="onBlogPage()" src="../../../assets/images/vichar.png" class="h-[30px] cursor-pointer">
         
         <div class="flex gap-2 items-center" >
-       
-          <button *ngIf="isBlogCreation" class="bg-[#ff6481] hover:bg-[#282424] text-white font-bold py-1 px-4 rounded-[20px]" (click)="onPublish()">Publish</button>
-  <svg class="w-[40px] h-[40px] fill-[#ff6481]  cursor-pointer hover:fill-[#282424]" (click)="onProfileView()">
+                              <!-- <p class="text-[#6A4EE9] hover:text-[#282424] text-xl font-bold  cursor-pointer hover:scale-105 hover:ease-in hover:duration-300"
+                                (click)="onCreators()">Creators</p> -->
+
+          <button *ngIf="isBlogCreation" class="bg-[#6A4EE9] hover:bg-[#282424] text-white font-bold py-1 px-4 rounded-[20px]" (click)="onPublish()">Publish</button>
+  <svg class="w-[40px] h-[40px] fill-[#6A4EE9]  cursor-pointer hover:fill-[#282424]" (click)="onProfileView()">
     <use href="../../../assets/images/account-circle.svg#account"></use>
   </svg>
         </div>

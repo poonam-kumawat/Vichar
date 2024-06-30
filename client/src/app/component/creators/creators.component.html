@@ -1,0 +1,26 @@
+<app-header-blog *ngIf="!isBlogdashboard"></app-header-blog>
+
+<div class="md:w-[1330px] px-4 mx-auto mb-10" [ngClass]="!isBlogdashboard?'mt-60':'mt-40'">
+    <div class="grid md:grid-cols-4 gap-x-8 gap-y-32">
+        <div class="" *ngFor="let item of creators">
+            <div class="border  max-h-[250px] border-gray-300 rounded-lg p-4 relative cursor-pointer hover:border-[#6A4EE9]" (click)="onCreatorDetails(item._id)">
+                <div class="absolute -top-28 right-0 left-0 bottom-0">
+                    <img *ngIf="item.profilePicture" [src]="item.profilePicture"
+                        class="w-[170px] m-auto h-[170px]  mt-5 rounded-[50%] border-4  border-[#6A4EE9]" />
+                    <svg *ngIf="!item.profilePicture" class="w-[200px]  h-[200px] fill-[#6A4EE9] m-auto  hover:fill-[#282424]">
+                        <use href="../../../assets/images/account-circle.svg#account"></use>
+                    </svg>
+                </div>
+                <div class="mt-20 border-t flex items-center justify-center">
+                    <div class="mt-6">
+                        <p class="text-lg font-semibold text-center">&#64;{{ item.name }}</p>
+                        <p class="text-lg font-semibold text-center">Hey I'm {{ item.name }}</p>
+                        <p class="text-gray-600 mt-2 text-center whitespace-nowrap text-ellipsis overflow-hidden w-[16rem]">{{ item.about }}</p>
+                        <p class="text-gray-600 mt-2 text-center">{{item.timeStamp | date}}</p>
+                    </div>               
+              
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

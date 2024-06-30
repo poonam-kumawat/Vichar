@@ -1,15 +1,14 @@
 import { Component, HostListener, OnInit, Renderer2 } from '@angular/core';
 import { SharedService } from '../../service/shared.service';
 import { CommonModule } from '@angular/common';
-import { parse } from 'angular-html-parser';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { CreatorsComponent } from '../creators/creators.component';
 
 @Component({
   selector: 'app-blogs-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,CreatorsComponent],
   templateUrl: './blogs-dashboard.component.html',
   styleUrl: './blogs-dashboard.component.css',
 })
@@ -20,16 +19,39 @@ export class BlogsDashboardComponent implements OnInit {
     private router: Router,
     public authService: AuthService
   ) {}
+  isBlogdashboard:any;
   ngOnInit(): void {
-    this.ongetBlogs();
+    this.isBlogdashboard=true;
+    this.ongetBlogs(this.currentPage);
   }
 
   blogsData: any;
-
-  ongetBlogs() {
-    this.sharedService.getBlogApi().subscribe((data) => {
-      this.blogsData = data;
+  currentPage: number = 1;
+  totalPages: any;
+  limit: number = 9;
+  ongetBlogs(page: number) {
+    const body = {
+      page: page,
+      limit: this.limit,
+    };
+    this.sharedService.getBlogApi(body).subscribe((data) => {
+      this.blogsData = data.blogs;
+      this.totalPages = Math.ceil(data.totalCount / this.limit);
     });
+  }
+
+  onPageChange(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.ongetBlogs(this.currentPage);
+    }
+  }
+  onPrevPage() {
+    this.onPageChange(this.currentPage - 1);
+  }
+
+  onNextPage() {
+    this.onPageChange(this.currentPage + 1);
   }
   OnNavigate(id: any) {
     this.authService.setBlogCreation(false);
@@ -43,8 +65,6 @@ export class BlogsDashboardComponent implements OnInit {
       this.router.navigate([`/login`]);
     }
   }
-
-  // isBlogCreation=false;
 
   onNewBlog() {
     if (this.authService.isLoggedIn()) {
@@ -77,7 +97,10 @@ export class BlogsDashboardComponent implements OnInit {
     this.router.navigate(['register']);
   }
 
-  onBlogPage(){
-    this.router.navigate(['/'])
+  onBlogPage() {
+    this.router.navigate(['/']);
+  }
+  onCreators(){
+    this.router.navigate(['creators']);
   }
 }

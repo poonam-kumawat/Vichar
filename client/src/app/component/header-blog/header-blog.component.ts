@@ -22,7 +22,6 @@ export class HeaderBlogComponent implements OnInit {
   isBlogCreation: any;
   ngOnInit(): void {
     this.isBlogCreation = this.authService.getBlogCreation();
-    
   }
   onPublish() {
     this.sharedService.blogCreateApi(this.publishData).subscribe((res: any) => {
@@ -39,5 +38,8 @@ export class HeaderBlogComponent implements OnInit {
   }
   onBlogPage() {
     this.router.navigate(['/']);
+  }
+  onCreators() {
+    this.router.navigate(['creators']);
   }
 }
