@@ -3,6 +3,7 @@ import { SharedService } from '../../service/shared.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-header-blog',
@@ -15,7 +16,8 @@ export class HeaderBlogComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private sharedService: SharedService,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
   @Input() publishData: any;
 
@@ -24,8 +26,21 @@ export class HeaderBlogComponent implements OnInit {
     this.isBlogCreation = this.authService.getBlogCreation();
   }
   onPublish() {
-    this.sharedService.blogCreateApi(this.publishData).subscribe((res: any) => {
-      this.router.navigate(['/']);
+    this.sharedService.blogCreateApi(this.publishData).subscribe({
+      next: (res: any) => {
+        this.router.navigate(['/']);
+      },
+      error: (err) => {
+        this.toastr.error(
+          'Please fill all fields',
+          'ERROR',
+          {
+            timeOut: 2000,
+          }
+        );
+
+        console.log(err);
+      },
     });
   }
   onProfileView() {

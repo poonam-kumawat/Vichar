@@ -136,6 +136,8 @@ export class BlogCreateionComponent implements OnInit {
     'Food',
     'Fashion',
     'Nature',
+    'Story',
+    'LifeStyle',
   ];
   @Input() SelectedValue: string = '';
   @Output() valueChange = new EventEmitter<string>();
