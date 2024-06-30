@@ -14,7 +14,6 @@ const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 import dotenv from "dotenv";
 dotenv.config();
 
-
 userRouter
   .route("/register")
   .post(async (req: Request, res: Response, next: any) => {
@@ -94,8 +93,7 @@ userRouter.route("/login/google").post(async (req: Request, res: Response) => {
     let userLogin = await user.findOne({ email });
 
     if (!userLogin) {
-      userLogin = new user({ email,
-         name: payload.name || "Google User" });
+      userLogin = new user({ email, name: payload.name || "Google User" });
       await userLogin.save();
     }
     const accessToken = jwt.sign(
@@ -124,39 +122,30 @@ userRouter.route("/login/google").post(async (req: Request, res: Response) => {
     });
   }
 });
- 
 
 userRouter.route("/profile/:id").get(async (req: Request, res: Response) => {
   try {
     const id = new mongoose.Types.ObjectId(req.params.id);
-    const userProfile = await user.aggregate(
-      [
-        {
-          $match: {
-            _id: id,
-          },
+    const userProfile = await user.aggregate([
+      {
+        $match: {
+          _id: id,
         },
-        {
-          $lookup: {
-            from: "blogs",
-            localField: "_id",
-            foreignField: "creator",
-            as: "blogsData",
-          },
+      },
+      {
+        $lookup: {
+          from: "blogs",
+          localField: "_id",
+          foreignField: "creator",
+          as: "blogsData",
         },
-        // { $unwind: { path: "$blogsData" } },
-      ],
-      
-    );
+      },
+    ]);
     return res.status(200).json(userProfile);
-    
-  } catch (error:any) {
-     return res.status(500).json({ error: error.message });
-    
+  } catch (error: any) {
+    return res.status(500).json({ error: error.message });
   }
-  
-
-})
+});
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
@@ -187,27 +176,26 @@ userRouter
         .json({ success: false, message: "Internal server error" });
     }
   });
-userRouter.route("/edit/profile").put(async(req:Request,res:Response)=>{
-   try {
-     const filter = req.body;
-     if (filter.id === undefined) throw new Error("Id is required!");
-     const data = await user.findByIdAndUpdate(filter.id, filter, {
-       upsert: false,
-     });
-     return res.status(200).json(data);
-   } catch (error: any) {
-     return res.status(500).json({ error: error.message });
-   }
-})
+userRouter.route("/edit/profile").put(async (req: Request, res: Response) => {
+  try {
+    const filter = req.body;
+    if (filter.id === undefined) throw new Error("Id is required!");
+    const data = await user.findByIdAndUpdate(filter.id, filter, {
+      upsert: false,
+    });
+    return res.status(200).json(data);
+  } catch (error: any) {
+    return res.status(500).json({ error: error.message });
+  }
+});
 
-userRouter.route("/creators").get(async(req:Request,res:Response)=>{
+userRouter.route("/creators").get(async (req: Request, res: Response) => {
   try {
     const data = await user.find();
-    res.status(200).json(data);    
-  } catch (error:any) {
-      return res.status(500).json({ error: error.message });
+    res.status(200).json(data);
+  } catch (error: any) {
+    return res.status(500).json({ error: error.message });
   }
-})
-
+});
 
 export default userRouter;
