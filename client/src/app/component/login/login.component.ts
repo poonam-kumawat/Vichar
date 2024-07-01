@@ -10,11 +10,7 @@ declare const google: any;
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    CommonModule,
-    HttpClientModule,    
-  ],
+  imports: [ReactiveFormsModule, CommonModule, HttpClientModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -29,18 +25,6 @@ export class LoginComponent implements OnInit {
     private toastr: ToastrService
   ) {}
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      google.accounts.id.initialize({
-        client_id:
-          '80200947676-gmvfbgc1pm3v2das68roah9mfqfoodq5.apps.googleusercontent.com',
-        callback: this.handleGoogleSignIn.bind(this),
-      });
-
-      google.accounts.id.renderButton(document.getElementById('buttonDiv'), {
-        theme: 'outline',
-        size: 'large',
-      });
-    }
     this.loginForm = this.fb.group({
       email: ['', Validators.compose([Validators.required, Validators.email])],
       password: ['', Validators.required],
@@ -63,16 +47,20 @@ export class LoginComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.authService.saveUserId(res.data._id);
-        this.toastr.success('Login Successfull!', 'Success!', { timeOut: 2000 });
+        this.toastr.success('Login Successfull!', 'Success!', {
+          timeOut: 2000,
+        });
         this.router.navigate(['/']);
       },
       error: (err) => {
         console.log(err);
-        this.toastr.error('fill the value', 'ERROR', { timeOut: 2000 });
+        this.toastr.error('Incorrect Credentials', 'ERROR', { timeOut: 2000 });
       },
     });
   }
   onResgister() {
     this.router.navigate(['register']);
   }
+  public showPassword: any;
+  public showPasswordOnPress: any;
 }

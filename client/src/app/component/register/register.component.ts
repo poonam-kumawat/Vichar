@@ -20,6 +20,10 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './register.component.css',
 })
 export class RegisterComponent implements OnInit {
+  public showPassword: any;
+  public showPasswordOnPress: any;
+  public showConfirmedPassword: any;
+  public showConfirmedPasswordOnPress: any;
   fb = inject(FormBuilder);
   route = inject(Router);
   constructor(
@@ -46,13 +50,13 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-      if (this.registeration.invalid) {
-        this.registeration.markAllAsTouched();
-        return;
-      }
+    if (this.registeration.invalid) {
+      this.registeration.markAllAsTouched();
+      return;
+    }
     this.sharedService.registerApi(this.registeration.value).subscribe({
       next: (res) => {
-        console.log(res)
+        console.log(res);
         this.toastr.success(
           res.success.message || 'Registered Successfully',
           'SUCCESS',
@@ -63,7 +67,6 @@ export class RegisterComponent implements OnInit {
         this.route.navigate(['login']);
       },
       error: (err) => {
-        
         this.toastr.error(
           err.error.message._message || 'User validation failed',
           'ERROR',

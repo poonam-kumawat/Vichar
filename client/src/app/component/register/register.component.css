@@ -1,0 +1,13 @@
+.hide {
+  display: none;
+}
+.inner-addon { 
+    position: relative; 
+}
+.inner-addon .eye, .inner-addon .eye-off {
+  position: absolute;
+right: 7px;
+ top: 7px;
+  z-index: 100;
+  cursor: pointer;
+}

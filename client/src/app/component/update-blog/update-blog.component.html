@@ -3,7 +3,7 @@
 <div class="updateWrap">
     <div class=" m-auto">
         <div class=" relative  flex justify-center items-center mx-4 md:mx-60 mt-32 mb-6">
-            <div class="min-w-[100%] md:min-w-[80%]">
+            <div class="w-[100%] md:w-[80%]">
                 <div class="flex justify-between mb-10" *ngIf="!isupdate">
                     <p class="text-xl cursor-pointer flex items-center text-[#282424]" (click)="onGoBack()"><svg
                             class="w-[30px] h-[30px] fill-[#6A4EE9] mr-1  cursor-pointer hover:fill-[#282424]">
@@ -25,9 +25,10 @@
                 </div>
                 <div [ngStyle]="{'margin-bottom': !isupdate?'':'160px'}" *ngIf="!isupdate">
                     <div *ngFor="let detail of detailBlog">
-                        <p class="text-xl md:text-2xl text-[#828282] mb-6">{{detail.type | uppercase }}</p>
+                        
                         <p class="text-4xl md:text-5xl font-bold mb-6">{{detail.title}}</p>
-                        <div class="mt-6" [innerHtml]="detail.description"></div>
+                        <p class="text-xl  border-y border-[#ddd] py-2 text-[#828282] mb-6">{{detail.type | uppercase }}</p>
+                        <div class="mt-6 imageCss"  #contentDiv [innerHtml]="detail.description"></div>
                     </div>
                     <div class="mt-5 border-t-2 border-[#ddd] ">
                         <div class="flex items-center gap-2 mt-5">
@@ -37,11 +38,8 @@
                                 <use href="../../../assets/images/account-circle.svg#account"></use>
                             </svg>
                             <p>{{creator.name}}</p>
-                            <p>{{creator.timeStamp|date}}</p>
-                    
-                        </div>
-                    
-                    
+                            <p>{{creator.timeStamp|date}}</p>                    
+                        </div>                   
                     </div>
                 </div>
                 
@@ -49,7 +47,7 @@
                     <form (ngSubmit)="onUpdate()">
                         <div class="grid gap-4">
                             <textarea appAutoResize maxlength="150" rows="1"
-                                class="text-3xl md:text-4xl pb-1 overflow-y-hidden resize-none focus:outline-none"
+                                class="text-3xl font-bold mb-5 md:text-4xl pb-1 overflow-y-hidden resize-none focus:outline-none"
                                 type="text" [(ngModel)]="tilteData" name="title"></textarea>
                             <quill-editor class="min-h-[480px] content-edito mb-16" [placeholder]="''"
                                 [modules]="quillConfiguration" [(ngModel)]="htmlText" name="content"
@@ -57,7 +55,7 @@
                                 (onContentChanged)="onContentChanged($event)">
                             </quill-editor>
                             <div
-                                class="flex justify-between gap-4 md:absolute fixed p-4  border-[1px] md:border-none md:border-[0px] bg-white  border-[#747474] bottom-0 right-0  left-0">
+                                class="md:m-auto md:w-[80%] flex justify-between gap-4 md:absolute fixed p-4  border-[1px] md:border-none md:border-[0px] bg-white  border-[#747474] bottom-0 right-0  left-0">
                                 <button (click)="cancelEdit()"
                                     class="bg-[#6A4EE9] hover:bg-[#282424] w-full text-white font-bold py-2 px-4 rounded">Cancel</button>
                                 <button

@@ -15,8 +15,22 @@
                             >Email is required to login and write your Vichar</p>
                         <p class="text-red-600" *ngIf="loginForm.hasError('email','email')">It's not correct way to write, please write valid email</p>
                         </div>
-                        <div class="grid gap-1">
-                        <input class="focus:outline-none border-[1px] p-2 rounded-[5px] border-[#ddd]" formControlName="password" type="password" placeholder="Password">
+                        <div class="grid gap-1 inner-addon right-addon">
+                        <!-- <input class="focus:outline-none border-[1px] p-2 rounded-[5px] border-[#ddd]" formControlName="password" type="password" placeholder="Password"> -->
+                                <div class="input-group col-6 mx-auto">
+                                <input name="password"  formControlName="password" [type]="showPassword ? 'text' : 'password'" class="form-control pwd-control border-[#ddd] border-[1px] p-2 rounded-[5px] focus:outline-none focus:border-[#ffff]"
+                                    id="password-field" placeholder="Password">
+                                <div>
+                                    <svg [class.hide]="showPassword" class="eye w-[25px] h-[25px] fill-[#6A4EE9]  cursor-pointer hover:fill-[#282424]" (click)="showPassword = !showPassword">
+                                        <use href="../../../assets/images/eye-outline.svg#eye"></use>
+                                    </svg>
+                                    <svg [class.hide]="!showPassword"  class="eye-off w-[25px] h-[25px] fill-[#6A4EE9]  cursor-pointer hover:fill-[#282424]" (click)="showPassword = !showPassword">
+                                        <use href="../../../assets/images/eye-off-outline.svg#eye-off"></use>
+                                    </svg>                                  
+                                </div>
+                            
+                        </div>
+
                         <p *ngIf="loginForm.hasError('required','password') && loginForm.controls['password'].dirty"
                             class="text-red-600">Just a small step fill the password please</p>
                             </div>
@@ -26,17 +40,8 @@
                     </form>
 
                 </div>
-                <div class="flex justify-center p-4">
-                    <div id="g_id_onload" data-client_id="80200947676-gmvfbgc1pm3v2das68roah9mfqfoodq5.apps.googleusercontent.com"
-                        data-context="signin" data-ux_mode="popup" data-login_uri="http://localhost:5000/api/user/login/google"
-                        data-auto_prompt="false">
-                    </div>
-                
-                    <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline" data-text="signin_with"
-                        data-size="large" data-logo_alignment="left">
-                    </div>
-                </div>
-                <p class="text-center text-[14px]">Don't have account Let's <span class="text-[#6A4EE9] underline cursor-pointer" (click)="onResgister()">Register Vichar</span></p>
+             
+                <p class="text-center text-[14px] mt-8">Don't have account Let's <span class="text-[#6A4EE9] underline cursor-pointer" (click)="onResgister()">Register Vichar</span></p>
             </div>
             
         </div>

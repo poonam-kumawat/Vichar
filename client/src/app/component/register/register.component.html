@@ -26,15 +26,54 @@
                             <p *ngIf="registeration.hasError('email','email') " style="color:red">email is invalid</p>
                         </div>
 
-                        <div class="grid gap-1">
-                            <input class="focus:outline-none border-[1px] p-2 rounded-[5px] border-[#ddd]"
-                                formControlName="password" type="password" placeholder="Password">
+                        <div class="grid gap-1 inner-addon right-addon">
+                            <!-- <input class="focus:outline-none border-[1px] p-2 rounded-[5px] border-[#ddd]"
+                                formControlName="password" type="password" placeholder="Password"> -->
+
+                            <div class="input-group col-6 mx-auto">
+                                <input name="password" [type]="showPassword ? 'text' : 'password'"
+                                    class="form-control pwd-control border-[#ddd] border-[1px] p-2 rounded-[5px] focus:outline-none focus:border-[#ffff]"
+                                    id="password-field" placeholder="Password" formControlName="password">
+                                <div>
+                                    <svg [class.hide]="showPassword"
+                                        class="eye w-[25px] h-[25px] fill-[#6A4EE9]  cursor-pointer hover:fill-[#282424]"
+                                        (click)="showPassword = !showPassword">
+                                        <use href="../../../assets/images/eye-outline.svg#eye"></use>
+                                    </svg>
+                                    <svg [class.hide]="!showPassword"
+                                        class="eye-off w-[25px] h-[25px] fill-[#6A4EE9]  cursor-pointer hover:fill-[#282424]"
+                                        (click)="showPassword = !showPassword">
+                                        <use href="../../../assets/images/eye-off-outline.svg#eye-off"></use>
+                                    </svg>
+                                </div>
+
+                            </div>
                             <p *ngIf="registeration.hasError('required','password') && registeration.controls['password'].touched"
                                 style="color:red">Password is required</p>
                         </div>
-                        <div class="grid gap-1">
-                            <input class="focus:outline-none border-[1px] p-2 rounded-[5px] border-[#ddd]"
-                                formControlName="confirmPassword" type="password" placeholder="Confirm Password">
+                        <div class="grid gap-1 inner-addon right-addon">
+                            <!-- <input class="focus:outline-none border-[1px] p-2 rounded-[5px] border-[#ddd]"
+                                formControlName="confirmPassword" type="password" placeholder="Confirm Password"> -->
+
+                            <div class="input-group col-6 mx-auto">
+                                <input name="password" [type]="showConfirmedPassword ? 'text' : 'password'"
+                                    formControlName="confirmPassword"
+                                    class="form-control pwd-control border-[#ddd] border-[1px] p-2 rounded-[5px] focus:outline-none focus:border-[#ffff]"
+                                    id="password-field" placeholder="Confirm Password">
+                                <div>
+                                    <svg [class.hide]="showConfirmedPassword"
+                                        class="eye w-[25px] h-[25px] fill-[#6A4EE9]  cursor-pointer hover:fill-[#282424]"
+                                        (click)="showConfirmedPassword = !showConfirmedPassword">
+                                        <use href="../../../assets/images/eye-outline.svg#eye"></use>
+                                    </svg>
+                                    <svg [class.hide]="!showConfirmedPassword"
+                                        class="eye-off w-[25px] h-[25px] fill-[#6A4EE9]  cursor-pointer hover:fill-[#282424]"
+                                        (click)="showConfirmedPassword = !showConfirmedPassword">
+                                        <use href="../../../assets/images/eye-off-outline.svg#eye-off"></use>
+                                    </svg>
+                                </div>
+
+                            </div>
                             <p *ngIf="registeration.hasError('required','confirmPassword') && registeration.controls['confirmPassword'].touched"
                                 style="color:red">required</p>
                             <p *ngIf="registeration.hasError('confirmPasswordValidator','confirmPassword') "

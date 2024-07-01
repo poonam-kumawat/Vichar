@@ -8,7 +8,7 @@ import { CreatorsComponent } from '../creators/creators.component';
 @Component({
   selector: 'app-blogs-dashboard',
   standalone: true,
-  imports: [CommonModule,CreatorsComponent],
+  imports: [CommonModule, CreatorsComponent],
   templateUrl: './blogs-dashboard.component.html',
   styleUrl: './blogs-dashboard.component.css',
 })
@@ -19,9 +19,9 @@ export class BlogsDashboardComponent implements OnInit {
     private router: Router,
     public authService: AuthService
   ) {}
-  isBlogdashboard:any;
+  isBlogdashboard: any;
   ngOnInit(): void {
-    this.isBlogdashboard=true;
+    this.isBlogdashboard = true;
     this.ongetBlogs(this.currentPage);
   }
 
@@ -100,7 +100,12 @@ export class BlogsDashboardComponent implements OnInit {
   onBlogPage() {
     this.router.navigate(['/']);
   }
-  onCreators(){
+  onCreators() {
     this.router.navigate(['creators']);
   }
+  isDropdownOpen = false;
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
+ 
 }

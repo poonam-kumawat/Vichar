@@ -19,7 +19,7 @@
           </li>
         </ul>
       </div>
-    <textarea appAutoResize maxlength="150" rows="1"  class="text-4xl pb-1 overflow-y-hidden mt-4 focus:outline-none resize-none" type="text" placeholder="Title..." [(ngModel)]="titleText"></textarea>
+    <textarea appAutoResize maxlength="150" rows="1"  class="text-4xl pb-1 font-bold mb-5 overflow-y-hidden mt-4 focus:outline-none resize-none" type="text" placeholder="Title..." [(ngModel)]="titleText"></textarea>
      <quill-editor class="content-editor mb-12" [placeholder]="''" [modules]="quillConfiguration" [(ngModel)]="htmlText"  
     (onSelectionChanged)="onSelectionChanged($event)" (onContentChanged)="onContentChanged($event)">
   </quill-editor>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuillModule } from 'ngx-quill';
 import 'quill/dist/quill.core.css';
@@ -28,7 +28,9 @@ Quill.register('modules/imageHandler', ImageHandler);
   templateUrl: './update-blog.component.html',
   styleUrl: './update-blog.component.css',
 })
-export class UpdateBlogComponent implements OnInit {
+export class UpdateBlogComponent
+  implements OnInit, AfterViewInit, AfterViewChecked
+{
   constructor(
     private sharedService: SharedService,
     private route: ActivatedRoute,
@@ -57,14 +59,11 @@ export class UpdateBlogComponent implements OnInit {
               file.type === 'image/png' ||
               file.type === 'image/jpg'
             ) {
-              // File types supported for image
               if (file.size < 100000000) {
                 const uploadData = new FormData();
-                console.log('>>>', uploadData);
                 uploadData.append('file', file, file.name);
-                // uploadData.append('file', file.name);
-                return this.http
-                  .post('http://localhost:5000/api/blog/upload', uploadData)
+                return this.sharedService
+                  .blogUploadApi(uploadData)
                   .toPromise()
                   .then((result: any) => {
                     console.log(result);
@@ -73,8 +72,6 @@ export class UpdateBlogComponent implements OnInit {
                   })
                   .catch((error: any) => {
                     reject('Upload failed');
-                    // Handle error control
-                    console.error('Error:', error);
                   });
               } else {
                 reject('Size too large');
@@ -115,9 +112,7 @@ export class UpdateBlogComponent implements OnInit {
   detailBlog: any;
   idDelete: any;
   tilteData: any;
-  // ngOnInit(): void {
-  //   this.onDetailDisplay();
-  // }
+
   creator: any;
   onDetailDisplay() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -161,6 +156,7 @@ export class UpdateBlogComponent implements OnInit {
     this.sharedService.editBlogApi(body).subscribe((res: Response) => {
       this.onDetailDisplay();
       this.isupdate = false;
+      this.handleQuillCss();
     });
   }
   onDelete() {
@@ -173,5 +169,30 @@ export class UpdateBlogComponent implements OnInit {
   }
   cancelEdit() {
     this.isupdate = false;
+  }
+  @ViewChild('contentDiv') contentDiv!: ElementRef;
+
+  ngAfterViewInit() {
+    this.handleQuillCss();
+  }
+  ngAfterViewChecked(): void {
+   this.handleQuillCss();
+  }
+  handleQuillCss() {
+    const imageElement = this.contentDiv.nativeElement.querySelector('img');
+    const textElements = this.contentDiv.nativeElement.querySelectorAll('p');
+    const listElements = this.contentDiv.nativeElement.querySelectorAll('ol');
+
+    imageElement.style.display = 'block';
+    imageElement.style.margin = '0 auto';
+    textElements.forEach((textElement: HTMLElement) => {
+      textElement.style.fontSize = '20px';
+      textElement.style.lineHeight = '32px';
+      textElement.style.marginBottom = '15px';
+    });
+    listElements.forEach((listElement: HTMLElement) => {
+      listElement.style.fontSize = '20px';
+      listElement.style.marginBottom = '15px';
+    });
   }
 }

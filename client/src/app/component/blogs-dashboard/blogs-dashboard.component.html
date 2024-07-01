@@ -4,11 +4,10 @@
             <div class="max-w-[1830px] m-auto">
                 <div id="header"
                     class="px-8 py-4 shadow-md bg-[#ffffff] md:mx-28 absolute top-8 right-2 left-2 md:right-16 md:left-16 rounded-[50px]">
-                    <div class="flex justify-between items-center">
+                    <!-- <div class="flex justify-between items-center">
                         <img (click)="onBlogPage()" src="../../../assets/images/vichar.png"
                             class="h-[30px] cursor-pointer">
                         <div class="flex justify-center gap-4 items-center">
-                            <!-- <p class="text-[#6A4EE9] hover:text-[#282424] text-2xl font-bold  cursor-pointer hover:scale-105 hover:ease-in hover:duration-300" (click)="onCreators()">Creators</p> -->
                             <p *ngIf="!authService.isLoggedIn()"
                                 class="text-[#6A4EE9] hover:text-[#282424] text-2xl font-bold  cursor-pointer hover:scale-105 hover:ease-in hover:duration-300"
                                 (click)="onLogin()">Login</p>
@@ -25,9 +24,41 @@
                                 (click)="onProfileView()">
                                 <use href="../../../assets/images/account-circle.svg#account"></use>
                             </svg>
+                            
                         </div>
 
+                    </div> -->
+
+                    <div class="flex justify-between items-center">
+                        <img (click)="onBlogPage()" src="../../../assets/images/vichar.png" class="h-[30px] cursor-pointer">
+                        <div class="flex justify-center gap-4 items-center">
+                            <p *ngIf="!authService.isLoggedIn()"
+                                class="text-[#6A4EE9] hover:text-[#282424] text-2xl font-bold  cursor-pointer hover:scale-105 hover:ease-in hover:duration-300"
+                                (click)="onLogin()">Login</p>
+                            <!-- <p *ngIf="authService.isLoggedIn()"
+                                class="text-[#6A4EE9] hover:text-[#282424] text-2xl font-bold  cursor-pointer hover:scale-105 hover:ease-in hover:duration-300"
+                                (click)="logout()">logout</p> -->
+                    
+                            <p class="text-[#6A4EE9] hover:text-[#282424] text-2xl font-bold  cursor-pointer hover:scale-105 hover:ease-in hover:duration-300"
+                                (click)="onSignUp()" *ngIf="!authService.isLoggedIn()">Sign Up</p>
+                            <svg class="w-[30px] h-[30px] fill-[#6A4EE9]  cursor-pointer hover:fill-[#282424]" (click)="onNewBlog()">
+                                <use href="../../../assets/images/pencil-box-outline.svg#pencil"></use>
+                            </svg>
+                            <div class="relative">
+                                <svg class="w-[30px] h-[30px] fill-[#6A4EE9] cursor-pointer hover:fill-[#282424]"
+                                    (click)="toggleDropdown()">
+                                    <use href="../../../assets/images/account-circle.svg#account"></use>
+                                </svg>
+                                <div *ngIf="isDropdownOpen"
+                                    class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
+                                    <a (click)="onProfileView()"
+                                        class="block px-4 py-2 text-gray-800 hover:bg-gray-100 cursor-pointer">Profile</a>
+                                    <a *ngIf="authService.isLoggedIn()" (click)="logout()" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 cursor-pointer">Logout</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
                 <div class="flex justify-center items-center">
                     <div class="grid gap-10 mt-64 text-center px-4 md:px-52">
@@ -108,10 +139,10 @@
             </div>
             <div *ngIf="blogsData.length>=9" class="pagination mt-8 flex justify-center items-center gap-4">
                 <button (click)="onPrevPage()" [disabled]="currentPage === 1"
-                    class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Previous</button>
+                    class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 cursor-pointer">Previous</button>
                 <span>Page {{ currentPage }} of {{ totalPages }}</span>
                 <button (click)="onNextPage()" [disabled]="currentPage === totalPages"
-                    class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Next</button>
+                    class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400 cursor-pointer">Next</button>
             </div>
 
 
