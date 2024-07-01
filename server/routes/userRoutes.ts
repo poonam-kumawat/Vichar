@@ -35,7 +35,6 @@ userRouter
   });
 
 userRouter.route("/login").post(async (req: Request, res: Response) => {
-  // res.redirect("http://localhost:4200/dashboard");
   try {
     const userLogin = await user.findOne({ email: req.body.email });
     if (!userLogin) {
@@ -59,7 +58,6 @@ userRouter.route("/login").post(async (req: Request, res: Response) => {
         expiresIn: "20d",
       }
     );
-    // return res.status(200).send("Login successfully");
     res
       .cookie("access_Token", accessToken, { httpOnly: true })
       .status(200)
@@ -69,9 +67,7 @@ userRouter.route("/login").post(async (req: Request, res: Response) => {
         data: userLogin,
       });
   } catch (e: any) {
-    res.status(500).json({
-      message: e || "Bad Request. Please Try Again",
-    });
+    res.status(500).json({ success: false, message: e.message });
   }
 });
 
