@@ -16,7 +16,9 @@
                         <p class="text-lg font-semibold text-center">&#64;{{ item.name }}</p>
                         <p class="text-lg font-semibold text-center">Hey I'm {{ item.name }}</p>
                         <p class="text-gray-600 mt-2 text-center whitespace-nowrap text-ellipsis overflow-hidden w-[16rem]">{{ item.about }}</p>
-                        <p class="text-gray-600 mt-2 text-center">{{item.timeStamp | date}}</p>
+                        <p class="text-gray-600 mt-2 text-center flex justify-center items-center gap-2"><svg class="w-[18px] h-[18px] fill-gray-600 mt-1 cursor-pointer">
+                            <use href="../../../assets/images/calendar.svg#cal"></use>
+                        </svg>{{item.timeStamp | date}}</p>
                     </div>               
               
                 </div>

@@ -35,10 +35,7 @@
                             <p *ngIf="!authService.isLoggedIn()"
                                 class="text-[#6A4EE9] hover:text-[#282424] text-2xl font-bold  cursor-pointer hover:scale-105 hover:ease-in hover:duration-300"
                                 (click)="onLogin()">Login</p>
-                            <!-- <p *ngIf="authService.isLoggedIn()"
-                                class="text-[#6A4EE9] hover:text-[#282424] text-2xl font-bold  cursor-pointer hover:scale-105 hover:ease-in hover:duration-300"
-                                (click)="logout()">logout</p> -->
-                    
+                                          
                             <p class="text-[#6A4EE9] hover:text-[#282424] text-2xl font-bold  cursor-pointer hover:scale-105 hover:ease-in hover:duration-300"
                                 (click)="onSignUp()" *ngIf="!authService.isLoggedIn()">Sign Up</p>
                             <svg class="w-[30px] h-[30px] fill-[#6A4EE9]  cursor-pointer hover:fill-[#282424]" (click)="onNewBlog()">
