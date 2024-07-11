@@ -14,6 +14,7 @@ const port = 5000;
 connectToMongo();
 const allowedOrigins = [
   "http://localhost:4200",
+  "https://vichar-it.vercel.app"
  
 ];
 const options: cors.CorsOptions = {
